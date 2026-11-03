@@ -100,7 +100,7 @@ export default function OrderModal({
                 />
               </div>
               <div className="min-w-0 py-1">
-                <p className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-rust">
+                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-leaf">
                   {product.categoryName} · {product.modelYear || 'Unit pilihan'}
                 </p>
                 <h3 className="mt-2 font-display text-2xl font-semibold leading-none tracking-[-0.04em]">
@@ -110,7 +110,7 @@ export default function OrderModal({
                   {product.transmission} · {product.seats} kursi ·{' '}
                   {product.fuel}
                 </p>
-                <p className="mt-2 font-mono text-[0.6rem] font-medium uppercase tracking-[0.12em] text-ink-soft">
+                <p className="mt-2 text-[0.6rem] font-medium uppercase tracking-[0.12em] text-ink-soft">
                   Min. {product.minRental || 1} hari
                 </p>
               </div>
@@ -186,7 +186,7 @@ export default function OrderModal({
                   >
                     −
                   </button>
-                  <span className="font-mono text-sm font-semibold text-ink">
+                  <span className="text-sm font-semibold text-ink">
                     {safeDays} hari
                   </span>
                   <button
@@ -259,7 +259,7 @@ export default function OrderModal({
 
           <aside className="flex flex-col rounded-[1.4rem] bg-ink p-5 text-bone sm:p-6">
             <div className="flex items-center justify-between gap-3">
-              <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-bone/55">
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-bone/55">
                 Ringkasan sewa
               </p>
               <span className="rounded-full border border-bone/20 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-bone/70">
@@ -286,14 +286,14 @@ export default function OrderModal({
                 <dt className="text-bone/55">
                   {formatPrice(rate, currency)} × {safeDays}
                 </dt>
-                <dd className="text-right font-mono text-xs text-bone/70">
+                <dd className="text-right text-xs text-bone/70">
                   {mode === 'driver' ? 'termasuk driver' : 'lepas kunci'}
                 </dd>
               </div>
             </dl>
 
             <div className="mt-auto border-t border-bone/15 pt-5">
-              <p className="font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-bone/55">
+              <p className="text-[0.62rem] font-medium uppercase tracking-[0.18em] text-bone/55">
                 Estimasi total
               </p>
               <p className="mt-2 font-display text-[2.15rem] font-semibold leading-none tracking-[-0.05em]">

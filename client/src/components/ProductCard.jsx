@@ -3,7 +3,7 @@ import { onImageError, productImage } from '../lib/images'
 
 function Spec({ label, value }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-line/80 bg-paper/70 px-2.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.08em] text-ink-soft">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-line/80 bg-paper/70 px-2.5 py-1 text-[0.62rem] font-medium uppercase tracking-[0.08em] text-ink-soft">
       <span className="text-muted">{label}</span>
       {value}
     </span>
@@ -33,19 +33,19 @@ export default function ProductCard({
         <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
 
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-          <span className="rounded-full bg-bone/90 px-3 py-1.5 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-ink backdrop-blur">
+          <span className="rounded-full bg-bone/90 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-ink backdrop-blur">
             {product.categoryName}
           </span>
           <span
-            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.14em] backdrop-blur ${
+            className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.14em] backdrop-blur ${
               available
-                ? 'bg-success/90 text-bone'
-                : 'bg-rust/90 text-bone'
+                ? 'bg-[#2563eb]/95 text-white'
+                : 'bg-[#93c5fd]/95 text-[#0f2744]'
             }`}
           >
             <span
               className={`size-1.5 rounded-full ${
-                available ? 'bg-bone' : 'bg-bone/80'
+                available ? 'bg-white' : 'bg-[#0f2744]/60'
               }`}
             />
             {available ? 'Tersedia' : 'Sedang disewa'}
@@ -53,12 +53,12 @@ export default function ProductCard({
         </div>
 
         {product.modelYear ? (
-          <span className="absolute bottom-4 left-4 rounded-md border border-bone/40 bg-ink/55 px-2.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-bone backdrop-blur">
+          <span className="absolute bottom-4 left-4 rounded-md border border-bone/40 bg-ink/55 px-2.5 py-1 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-bone backdrop-blur">
             {product.modelYear}
           </span>
         ) : null}
 
-        <span className="absolute bottom-4 right-4 rounded-full border border-bone/30 bg-ink/55 px-3 py-1 font-mono text-[0.6rem] font-medium uppercase tracking-[0.14em] text-bone backdrop-blur">
+        <span className="absolute bottom-4 right-4 rounded-full border border-bone/30 bg-ink/55 px-3 py-1 text-[0.6rem] font-medium uppercase tracking-[0.14em] text-bone backdrop-blur">
           {modeLabel}
         </span>
       </div>
@@ -83,7 +83,7 @@ export default function ProductCard({
 
         <div className="mt-auto flex items-end justify-between gap-4 border-t border-line/80 pt-5">
           <div>
-            <p className="font-mono text-[0.58rem] font-medium uppercase tracking-[0.18em] text-muted">
+            <p className="text-[0.58rem] font-medium uppercase tracking-[0.18em] text-muted">
               {rentalMode === 'driver' ? 'Tarif + driver' : 'Mulai dari'}
             </p>
             <p className="mt-1 flex items-baseline gap-1.5">

@@ -4,12 +4,6 @@ import ProductFormModal from './ProductFormModal'
 import { api, formatPrice } from '../lib/api'
 import { onImageError, productImage } from '../lib/images'
 
-const TABS = [
-  { id: 'products', label: 'Armada' },
-  { id: 'categories', label: 'Kategori' },
-  { id: 'store', label: 'Info toko' },
-]
-
 const inputClass =
   'h-12 w-full rounded-xl border border-line bg-bone px-3.5 text-sm font-medium text-ink outline-none transition placeholder:text-muted/70 focus:border-rust/60'
 const labelClass =
@@ -35,15 +29,15 @@ function StatusBadge({ status }) {
   const available = status === 'Tersedia'
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-[0.12em] ${
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.12em] ${
         available
-          ? 'bg-success/10 text-success'
-          : 'bg-rust/10 text-rust-dark'
+          ? 'bg-[#dbeafe] text-[#1d4ed8]'
+          : 'bg-[#bfdbfe] text-[#1e3a8a]'
       }`}
     >
       <span
         className={`size-1.5 rounded-full ${
-          available ? 'bg-success' : 'bg-rust'
+          available ? 'bg-[#1d4ed8]' : 'bg-[#60a5fa]'
         }`}
       />
       {available ? 'Tersedia' : 'Disewa'}
@@ -57,8 +51,9 @@ export default function AdminDashboard({
   products,
   categories,
   onRefresh,
+  tab: tabProp,
 }) {
-  const [tab, setTab] = useState('products')
+  const tab = tabProp ?? 'products'
   const [editing, setEditing] = useState(undefined)
   const [confirm, setConfirm] = useState(null)
   const [busy, setBusy] = useState(false)
@@ -175,7 +170,7 @@ export default function AdminDashboard({
         <div className="border-b border-line/80 bg-paper/55 px-5 py-6 sm:px-7 sm:py-8">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-rust">
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-rust">
                 Dashboard admin
               </p>
               <h1 className="mt-3 font-display text-[2.4rem] font-semibold leading-[0.95] tracking-[-0.05em] sm:text-5xl">
@@ -216,38 +211,13 @@ export default function AdminDashboard({
                 key={stat.label}
                 className="rounded-2xl border border-line/80 bg-bone/80 px-4 py-3"
               >
-                <p className="font-mono text-[0.58rem] font-medium uppercase tracking-[0.16em] text-muted">
+                <p className="text-[0.58rem] font-medium uppercase tracking-[0.16em] text-muted">
                   {stat.label}
                 </p>
                 <p className="mt-1 font-display text-3xl font-semibold leading-none tracking-[-0.04em]">
                   {stat.value}
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="border-b border-line/80 px-5 sm:px-7">
-          <div
-            className="no-scrollbar flex gap-6 overflow-x-auto"
-            role="tablist"
-            aria-label="Bagian admin"
-          >
-            {TABS.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                role="tab"
-                aria-selected={tab === item.id}
-                onClick={() => setTab(item.id)}
-                className={`shrink-0 border-b-2 px-1 py-4 text-xs font-bold uppercase tracking-[0.12em] transition ${
-                  tab === item.id
-                    ? 'border-rust text-ink'
-                    : 'border-transparent text-muted hover:text-ink'
-                }`}
-              >
-                {item.label}
-              </button>
             ))}
           </div>
         </div>
@@ -348,7 +318,7 @@ export default function AdminDashboard({
                             {' · '}
                             {product.fuel}
                           </p>
-                          <p className="mt-1 font-mono text-[0.68rem] font-medium text-ink-soft">
+                          <p className="mt-1 text-[0.68rem] font-medium text-ink-soft">
                             {formatPrice(product.price, store?.currency)}
                             /hari
                             {product.driverFee
@@ -481,7 +451,7 @@ export default function AdminDashboard({
                           <p className="font-display text-lg font-semibold tracking-[-0.02em]">
                             {category.name}
                           </p>
-                          <p className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-muted">
+                          <p className="mt-1 text-[0.62rem] uppercase tracking-[0.14em] text-muted">
                             {category.productCount || 0} mobil
                           </p>
                         </div>

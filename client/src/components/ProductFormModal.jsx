@@ -333,7 +333,7 @@ export default function ProductFormModal({
                   Tarif / hari
                 </label>
                 <div className="relative">
-                  <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-[0.62rem] font-semibold text-muted">
+                  <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[0.62rem] font-semibold text-muted">
                     {currency}
                   </span>
                   <input
@@ -354,7 +354,7 @@ export default function ProductFormModal({
                   Tarif driver
                 </label>
                 <div className="relative">
-                  <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-[0.62rem] font-semibold text-muted">
+                  <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[0.62rem] font-semibold text-muted">
                     {currency}
                   </span>
                   <input

@@ -18,7 +18,7 @@ Sukabumi Drive adalah storefront rental mobil harian di Sukabumi. Pengunjung bis
 
 - Backend: Node.js, Express 5, ESM, SQLite (`node:sqlite`), multer, JWT, bcryptjs.
 - Frontend: React 19, Vite 8, Tailwind CSS v4, oxlint.
-- Database: SQLite lokal (`src/db/katalogwa.sqlite`), seeded dari `src/db/data.json` saat tabel kosong.
+- Database: SQLite lokal (`server/src/db/katalogwa.sqlite`), seeded dari `server/src/db/data.json` saat tabel kosong.
 
 ## Struktur
 
@@ -48,6 +48,7 @@ Sukabumi Drive adalah storefront rental mobil harian di Sukabumi. Pengunjung bis
 Install dependensi backend:
 
 ```bash
+cd server
 npm install
 ```
 
@@ -71,9 +72,10 @@ Jika `.env` tidak ada, backend tetap berjalan dengan nilai fallback bawaan. `.en
 
 ## Menjalankan
 
-Backend (port 5000):
+Backend (port 5000), jalankan lebih dulu:
 
 ```bash
+cd server
 npm run dev
 # atau
 npm start
@@ -140,5 +142,5 @@ Hasil build ada di `client/dist/` dan diabaikan Git.
 - Tidak ada test suite; verifikasi dilakukan dengan `curl` dan browser.
 - `POST /api/auth/register` masih placeholder: tidak menyimpan admin dan tidak mengembalikan respons.
 - `mysql2` adalah dependensi lama yang tidak dipakai; penyimpanan data menggunakan SQLite.
-- Upload ditulis ke `src/uploads/` dan dilayani di `/uploads`.
+- Upload ditulis ke `server/src/uploads/` dan dilayani di `/uploads`.
 - File upload runtime, `node_modules/`, build output, dan file sementara diabaikan lewat `.gitignore`.

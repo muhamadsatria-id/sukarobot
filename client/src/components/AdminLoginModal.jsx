@@ -20,7 +20,6 @@ export default function AdminLoginModal({ open, onClose, onSuccess }) {
         throw new Error(response?.message || 'Login gagal. Coba lagi.')
       }
       onSuccess(response)
-      onClose()
     } catch (err) {
       setError(err.message)
     } finally {

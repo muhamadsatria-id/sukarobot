@@ -31,7 +31,7 @@ export default function CategoryPills({ categories, active, total, onChange }) {
             {item.name}
             {typeof item.count === 'number' ? (
               <span
-                className={`font-mono text-[0.62rem] font-medium ${
+                className={`text-[0.62rem] font-medium ${
                   isActive ? 'text-bone/60' : 'text-muted'
                 }`}
               >

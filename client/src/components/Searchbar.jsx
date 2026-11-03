@@ -1,11 +1,11 @@
 export default function Searchbar({ value, onChange }) {
   return (
     <div
-      className="group relative flex min-h-[3.25rem] w-full items-center rounded-full border border-line bg-bone/80 px-4 shadow-[0_1px_0_rgba(20,33,29,0.03)] transition focus-within:border-rust/60 focus-within:bg-bone focus-within:shadow-card"
+      className="group relative flex min-h-[3.25rem] w-full items-center rounded-full border border-line bg-bone/80 px-4 shadow-[0_1px_0_rgba(20,33,29,0.03)] transition focus-within:border-leaf/60 focus-within:bg-bone focus-within:shadow-card"
       role="search"
     >
       <svg
-        className="mr-3 size-5 shrink-0 text-muted transition group-focus-within:text-rust"
+        className="mr-3 size-5 shrink-0 text-muted transition group-focus-within:text-leaf"
         viewBox="0 0 24 24"
         width="20"
         height="20"

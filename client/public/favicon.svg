@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sukabumi Drive">
-  <rect width="64" height="64" rx="16" fill="#14211d"/>
-  <path d="M21 53c0-11 9-11 9-21S21 21 21 11" fill="none" stroke="#c9502c" stroke-width="6" stroke-linecap="round"/>
-  <path d="M43 53c0-11-9-11-9-21s9-11 9-21" fill="none" stroke="#f4f0e7" stroke-width="6" stroke-linecap="round"/>
-  <circle cx="32" cy="32" r="4" fill="#d6a45a"/>
+  <rect width="64" height="64" rx="16" fill="#1e3a8a"/>
+  <path d="M21 53c0-11 9-11 9-21S21 21 21 11" fill="none" stroke="#3c83f6" stroke-width="6" stroke-linecap="round"/>
+  <path d="M43 53c0-11-9-11-9-21s9-11 9-21" fill="none" stroke="#f9fcff" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="4" fill="#93c5fd"/>
 </svg>

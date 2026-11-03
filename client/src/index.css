@@ -5,26 +5,28 @@
   --font-display: "Bricolage Grotesque", "Manrope", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-paper: #f4f0e7;
-  --color-paper-deep: #e8e0d3;
-  --color-bone: #fffdf7;
-  --color-ink: #14211d;
-  --color-ink-soft: #3c4942;
-  --color-muted: #6d766f;
-  --color-line: #d7d0c2;
-  --color-line-strong: #b7ae9d;
-  --color-rust: #c9502c;
-  --color-rust-dark: #9d3a1e;
-  --color-rust-soft: #f3ddd3;
-  --color-moss: #2b4439;
-  --color-moss-dark: #172a22;
-  --color-sage: #dde4d7;
-  --color-gold: #d6a45a;
-  --color-danger: #a82d1b;
-  --color-success: #2f6a4f;
+  --color-paper: #eaf4ff;
+  --color-paper-deep: #d8eaff;
+  --color-bone: #f9fcff;
+  --color-ink: #0f2744;
+  --color-ink-soft: #27496d;
+  --color-muted: #5b7692;
+  --color-line: #cfe3f7;
+  --color-line-strong: #9dc4e8;
+  --color-rust: #3c83f6;
+  --color-rust-dark: #2563eb;
+  --color-rust-soft: #dbeafe;
+  --color-leaf: #3c83f6;
+  --color-leaf-dark: #2563eb;
+  --color-moss: #3c83f6;
+  --color-moss-dark: #1e3a8a;
+  --color-sage: #dbeafe;
+  --color-gold: #93c5fd;
+  --color-danger: #b42318;
+  --color-success: #3c83f6;
 
-  --shadow-card: 0 18px 44px -32px rgb(20 33 29 / 0.5);
-  --shadow-lift: 0 34px 70px -44px rgb(20 33 29 / 0.62);
+  --shadow-card: 0 18px 44px -32px rgb(15 39 68 / 0.28);
+  --shadow-lift: 0 34px 70px -44px rgb(15 39 68 / 0.36);
 
   --animate-rise: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade: fade 0.5s ease both;
@@ -61,8 +63,8 @@
     min-width: 320px;
     margin: 0;
     background:
-      radial-gradient(circle at 8% -12%, #fffdf7 0, transparent 34rem),
-      radial-gradient(circle at 100% 8%, #ebe3d5 0, transparent 28rem),
+      radial-gradient(circle at 8% -12%, #f9fcff 0, transparent 34rem),
+      radial-gradient(circle at 100% 8%, #d8eaff 0, transparent 28rem),
       var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
