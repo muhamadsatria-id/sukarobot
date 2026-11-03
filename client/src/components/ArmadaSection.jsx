@@ -42,10 +42,12 @@ export default function ArmadaSection({
 }) {
   return (
     <section
-      id="armada"
-      className="mx-auto w-full max-w-[1240px] scroll-mt-28 px-4 py-16 sm:px-6 sm:py-24 lg:px-8"
-    >
+        id="armada"
+        className="mx-auto w-full max-w-[1240px] scroll-mt-28 px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-24 lg:px-8"
+        >
+        {/* <div className="grid gap-10 border-t border-line pt-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16"></div> */}
       <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        
         <div>
           <p className="text-[0.64rem] font-semibold uppercase tracking-[0.24em] text-leaf">
             Armada

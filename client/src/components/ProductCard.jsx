@@ -22,6 +22,7 @@ export default function ProductCard({
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-[1.65rem] border border-line bg-bone/80 shadow-[0_1px_0_rgba(20,33,29,0.03)] transition duration-300 hover:-translate-y-1 hover:border-ink/20 hover:shadow-lift">
+      {/* Area Gambar */}
       <div className="relative aspect-[16/10] overflow-hidden bg-paper-deep">
         <img
           src={productImage(product)}
@@ -32,6 +33,7 @@ export default function ProductCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
 
+        {/* Label Kategori & Status Ketersediaan */}
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
           <span className="rounded-full bg-bone/90 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-ink backdrop-blur">
             {product.categoryName}
@@ -63,7 +65,15 @@ export default function ProductCard({
         </span>
       </div>
 
+      {/* Konten Kartu */}
       <div className="flex flex-1 flex-col p-5 sm:p-6">
+        {/* Apple Dots di Kiri Atas (Di bawah foto) */}
+        <div className="mb-3 flex items-center gap-1.5">
+          <span className="size-2.5 rounded-full bg-[#ff5f56]" />
+          <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
+          <span className="size-2.5 rounded-full bg-[#27c93f]" />
+        </div>
+
         <div className="flex items-start justify-between gap-3">
           <div>
             <h3 className="font-display text-[1.55rem] font-semibold leading-none tracking-[-0.04em] text-ink">

@@ -1,4 +1,4 @@
-import AboutSection from './AboutSection'
+// import AboutSection from './AboutSection'
 import AreaSection from './AreaSection'
 import ArmadaSection from './ArmadaSection'
 import CaraSewaSection from './CaraSewaSection'
@@ -31,7 +31,7 @@ export default function HomeSections({ ctx }) {
         readyCount={readyCount}
       />
       <Paralaks />
-      <AboutSection store={store} />
+      {/* <AboutSection store={store} /> */}
       <ArmadaSection
         loading={loading}
         products={products}

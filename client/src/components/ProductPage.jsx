@@ -39,16 +39,16 @@ export default function ProductPage({
   }
 
   return (
-    <section className="mx-auto w-full max-w-[1240px] px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+    <section className="mx-auto w-full max-w-[1240px] px-4 pt-2 pb-10 sm:px-6 sm:pt-4 sm:pb-14 lg:px-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-[0.64rem] font-semibold uppercase tracking-[0.24em] text-leaf">
             Armada
           </p>
-          <h1 className="mt-3 font-display text-[2.7rem] font-semibold leading-[0.92] tracking-[-0.055em] text-ink sm:text-[4.2rem]">
+          <h1 className="mt-1 font-display text-[2.7rem] font-semibold leading-[0.92] tracking-[-0.055em] text-ink sm:text-[4.2rem]">
             Semua mobil.
           </h1>
-          <p className="mt-3 max-w-xl text-sm leading-7 text-muted">
+          <p className="mt-2 max-w-xl text-sm leading-7 text-muted">
             Pilih unit, bandingkan tarif, lalu pesan lewat WhatsApp.
           </p>
         </div>
@@ -62,7 +62,7 @@ export default function ProductPage({
         </button>
       </div>
 
-      <div className="mt-8 rounded-[1.5rem] border border-line bg-bone/55 p-3 sm:p-4">
+      <div className="mt-5 space-y-4">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-center">
           <div className="min-w-0 flex-1">
             <Searchbar value={search} onChange={setSearch} />
@@ -72,7 +72,7 @@ export default function ProductPage({
             <span className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-muted">
               Tampilkan tarif
             </span>
-            <div className="grid grid-cols-2 rounded-full border border-line bg-paper/70 p-1">
+            <div className="grid grid-cols-2 rounded-full bg-paper/70 p-1 gap-1">
               {[
                 { id: 'self', label: 'Lepas kunci' },
                 { id: 'driver', label: 'Dengan driver' },
@@ -85,7 +85,7 @@ export default function ProductPage({
                   className={`rounded-full px-3 py-2 text-xs font-bold transition ${
                     rentalMode === item.id
                       ? 'bg-ink text-bone shadow-card'
-                      : 'text-muted hover:text-ink'
+                      : 'bg-white text-muted hover:text-ink hover:bg-white/90'
                   }`}
                 >
                   {item.label}
@@ -95,7 +95,7 @@ export default function ProductPage({
           </div>
         </div>
 
-        <div className="mt-4">
+        <div>
           <CategoryPills
             categories={categories}
             active={activeCategory}
@@ -105,7 +105,7 @@ export default function ProductPage({
         </div>
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <p className="text-[0.62rem] font-medium uppercase tracking-[0.14em] text-muted">
           {loading
             ? 'Memuat armada…'
@@ -122,7 +122,7 @@ export default function ProductPage({
         ) : null}
       </div>
 
-      <div className="mt-6">
+      <div className="mt-5">
         {loading ? (
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {Array.from({ length: 6 }, (_, index) => (

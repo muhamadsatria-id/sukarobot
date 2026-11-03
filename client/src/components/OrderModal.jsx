@@ -76,11 +76,23 @@ export default function OrderModal({
 
   const waUrl = whatsappLink(store?.phone, message)
 
+  // Title Modal dilengkapi dekorasi Tiga Titik Apple / macOS di paling kiri atas
+  const modalTitle = (
+    <div>
+      <div className="mb-3 flex items-center gap-1.5">
+        <span className="size-2.5 rounded-full bg-[#ff5f56]" />
+        <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
+        <span className="size-2.5 rounded-full bg-[#27c93f]" />
+      </div>
+      <span>{product ? `Sewa ${product.name}` : 'Sewa mobil'}</span>
+    </div>
+  )
+
   return (
     <Modal
       open={open}
       onClose={onClose}
-      title={product ? `Sewa ${product.name}` : 'Sewa mobil'}
+      title={modalTitle}
       description="Isi rencana perjalanan, lalu kirim detailnya ke WhatsApp kami."
       size="lg"
     >
@@ -90,29 +102,32 @@ export default function OrderModal({
           onSubmit={(event) => event.preventDefault()}
         >
           <div className="space-y-5">
-            <div className="flex gap-4 rounded-[1.4rem] border border-line bg-paper/60 p-3">
-              <div className="relative h-28 w-36 shrink-0 overflow-hidden rounded-[1rem] bg-paper-deep">
-                <img
-                  src={productImage(product)}
-                  alt={product.name}
-                  onError={onImageError}
-                  className="size-full object-cover"
-                />
-              </div>
-              <div className="min-w-0 py-1">
-                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-leaf">
-                  {product.categoryName} · {product.modelYear || 'Unit pilihan'}
-                </p>
-                <h3 className="mt-2 font-display text-2xl font-semibold leading-none tracking-[-0.04em]">
-                  {product.name}
-                </h3>
-                <p className="mt-2 text-xs leading-5 text-muted">
-                  {product.transmission} · {product.seats} kursi ·{' '}
-                  {product.fuel}
-                </p>
-                <p className="mt-2 text-[0.6rem] font-medium uppercase tracking-[0.12em] text-ink-soft">
-                  Min. {product.minRental || 1} hari
-                </p>
+            {/* Kartu Info Mobil (Tanpa Titik Apple) */}
+            <div className="rounded-[1.4rem] border border-line bg-paper/60 p-4 shadow-sm">
+              <div className="flex gap-4">
+                <div className="relative h-28 w-36 shrink-0 overflow-hidden rounded-[1rem] bg-paper-deep">
+                  <img
+                    src={productImage(product)}
+                    alt={product.name}
+                    onError={onImageError}
+                    className="size-full object-cover"
+                  />
+                </div>
+                <div className="min-w-0 py-1">
+                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-leaf">
+                    {product.categoryName} · {product.modelYear || 'Unit pilihan'}
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl font-semibold leading-none tracking-[-0.04em]">
+                    {product.name}
+                  </h3>
+                  <p className="mt-2 text-xs leading-5 text-muted">
+                    {product.transmission} · {product.seats} kursi ·{' '}
+                    {product.fuel}
+                  </p>
+                  <p className="mt-2 text-[0.6rem] font-medium uppercase tracking-[0.12em] text-ink-soft">
+                    Min. {product.minRental || 1} hari
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -257,7 +272,14 @@ export default function OrderModal({
             </div>
           </div>
 
+          {/* Kartu Ringkasan Sewa */}
           <aside className="flex flex-col rounded-[1.4rem] bg-ink p-5 text-bone sm:p-6">
+            <div className="mb-4 flex items-center gap-1.5">
+              <span className="size-2.5 rounded-full bg-[#ff5f56]" />
+              <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
+              <span className="size-2.5 rounded-full bg-[#27c93f]" />
+            </div>
+
             <div className="flex items-center justify-between gap-3">
               <p className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-bone/55">
                 Ringkasan sewa

@@ -29,13 +29,19 @@ export default function AboutSection({ store }) {
               { label: 'Area', value: 'Sukabumi & sekitar' },
               {
                 label: 'Operasional',
-                value: store?.operationalHours || '08.00–21.00',
+                value: store?.operationalHours || '08.00–21.00 WIB',
               },
             ].map((item) => (
               <div
                 key={item.label}
-                className="rounded-2xl border border-line bg-bone/60 p-4"
+                className="rounded-2xl border border-line bg-bone/60 p-4 shadow-sm"
               >
+                {/* Tiga Titik Lingkaran Apple / macOS */}
+                <div className="mb-3 flex items-center gap-1.5">
+                  <span className="size-2.5 rounded-full bg-[#ff5f56]" />
+                  <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
+                  <span className="size-2.5 rounded-full bg-[#27c93f]" />
+                </div>
                 <dt className="text-[0.56rem] font-semibold uppercase tracking-[0.16em] text-muted">
                   {item.label}
                 </dt>

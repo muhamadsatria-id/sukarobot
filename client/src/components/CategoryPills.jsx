@@ -20,10 +20,10 @@ export default function CategoryPills({ categories, active, total, onChange }) {
           <button
             key={item.id}
             type="button"
-            className={`flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition ${
+            className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold transition ${
               isActive
-                ? 'border-ink bg-ink text-bone shadow-card'
-                : 'border-line bg-bone/60 text-ink-soft hover:border-ink/30 hover:bg-bone'
+                ? 'bg-ink text-bone shadow-card'
+                : 'bg-bone/60 text-ink-soft hover:bg-bone'
             }`}
             aria-pressed={isActive}
             onClick={() => onChange(item.id)}
