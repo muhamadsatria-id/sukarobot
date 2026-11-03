@@ -1,2 +1,0 @@
-// component untuk menampilkan brand" atau logo brand di halaman home pages, biasanya digunakan untuk menampilkan brand" yang bekerja sama dengan kita, atau brand" yang kita jual
-//  berjalan atau gerak looping ke satu arah ke kanan atau ke kiri, bisa diatur di admin panel

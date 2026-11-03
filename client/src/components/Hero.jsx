@@ -1,1 +1,0 @@
-// component untuk section hero di halaman home pages

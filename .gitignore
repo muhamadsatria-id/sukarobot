@@ -27,7 +27,6 @@ node_modules/
 dist/
 build/
 client/dist/
-server/dist/
 .vite/
 .turbo/
 *.tsbuildinfo
@@ -35,9 +34,7 @@ server/dist/
 # --- Upload runtime ---------------------------------------------
 # Foto hasil upload user tidak perlu ikut Git.
 src/uploads/*
-server/src/uploads/*
 !src/uploads/.gitkeep
-!server/src/uploads/.gitkeep
 
 # --- Database lokal ---------------------------------------------
 # File SQLite bersifat runtime; seed utama tetap dipertahankan.

@@ -2,11 +2,10 @@
 
 ## Layout — read this first
 
-- The **active backend is the repo root**: `src/index.js`, `src/routes/*`, `src/db/*`, run via the root `package.json`.
-- **`server/` is a stale duplicate snapshot of `src/`.** Its `index.js`, `middleware/auth.js`, `routes/auth.js`, and `routes/store.js` have already diverged and are behind. Do not edit `server/`; make backend changes in root `src/`.
+- The **active backend is the repo root**: `src/index.js`, `src/routes/*`, `src/db/*`, run via the root `package.json`. The old `server/` snapshot has been removed; do not recreate it.
 - `client/` is a separate Vite + React 19 app with its own `package.json` and lockfile. The product is **Sukabumi Drive**, a daily car-rental storefront (lepas kunci / dengan driver). `App.jsx` renders `pages/Home.jsx`; the storefront and admin dashboard are in `src/components/` (modals use native `<dialog>`). API calls go through `src/lib/api.js`, which defaults to `http://localhost:5000` and can be overridden with `VITE_API_URL`. There is no router; admin mode is a state toggle in `Home.jsx`.
 - Styling is Tailwind CSS v4 via `@tailwindcss/vite`, all utilities inline in JSX. Design tokens (colors, fonts, radii) live in the `@theme` block in `client/src/index.css`; there is no `App.css`.
-- There is no root `.gitignore`, and `node_modules/` is tracked in git. Don't bulk-stage `node_modules` changes.
+- A root `.gitignore` now exists. `node_modules/` was historically tracked in Git; it is ignored going forward but may remain in the index until `git rm --cached` is run. Don't bulk-stage `node_modules` changes.
 
 ## Commands
 
