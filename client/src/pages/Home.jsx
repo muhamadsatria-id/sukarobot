@@ -272,7 +272,7 @@ export default function Home() {
         </div>
       ) : null}
 
-      <main className="flex-1 pt-24">
+      <main className={page === 'products' ? 'flex-1 pt-24' : 'flex-1'}>
         {page === 'products' ? (
           <ProductPage
             products={products}

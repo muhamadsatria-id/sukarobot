@@ -33,7 +33,7 @@ export default function Navbar({
 
       <header className="fixed inset-x-0 top-0 z-50">
         {/* Desktop navbar */}
-        <div className="pointer-events-auto hidden justify-center px-6 pt-5 md:flex lg:px-12">
+        <div className="pointer-events-auto hidden justify-end px-6 pt-5 md:flex lg:px-12">
           <nav className="flex w-full max-w-fit items-center space-x-2 rounded-full border border-line bg-bone/80 px-4 py-2 shadow-lg shadow-[0_18px_44px_-32px_rgba(15,39,68,0.28)] backdrop-blur-md transition-all">
             <div className="flex items-center space-x-1">
               {NAV_LINKS.map((link) => (

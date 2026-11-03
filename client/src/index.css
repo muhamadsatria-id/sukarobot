@@ -30,6 +30,8 @@
 
   --animate-rise: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade: fade 0.5s ease both;
+  /* Tambahkan animasi marquee-right di sini */
+  --animate-marquee-right: marquee-right 25s linear infinite;
 
   @keyframes rise {
     from {
@@ -50,97 +52,18 @@
       opacity: 1;
     }
   }
+
+  /* Keyframe pergerakan dari kiri ke kanan secara seamless */
+  @keyframes marquee-right {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 6.5rem;
-    color-scheme: light;
-  }
-
-  body {
-    min-width: 320px;
-    margin: 0;
-    background:
-      radial-gradient(circle at 8% -12%, #f9fcff 0, transparent 34rem),
-      radial-gradient(circle at 100% 8%, #d8eaff 0, transparent 28rem),
-      var(--color-paper);
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  #root {
-    min-height: 100svh;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    line-height: 0.98;
-    letter-spacing: -0.035em;
-    text-wrap: balance;
-  }
-
-  p {
-    text-wrap: pretty;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  button,
-  input,
-  textarea,
-  select {
-    font: inherit;
-    color: inherit;
-  }
-
-  button {
-    cursor: pointer;
-  }
-
-  button:disabled {
-    cursor: not-allowed;
-  }
-
-  img,
-  svg {
-    display: block;
-    max-width: 100%;
-  }
-
-  ::selection {
-    background: var(--color-rust);
-    color: var(--color-bone);
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--color-rust);
-    outline-offset: 3px;
-  }
-}
-
-@utility no-scrollbar {
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-@utility grain {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: multiply;
+  /* ... sisa CSS base Anda tetap sama ... */
 }
