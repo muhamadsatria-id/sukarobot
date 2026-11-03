@@ -1,0 +1,1 @@
+// untuk menampilkan toggle icon whatsapp di semua halaman, biasanya digunakan untuk mempermudah user menghubungi kita via whatsapp, bisa diatur di admin panel, misal mengubah nomor whatsapp, mengubah posisi toggle icon whatsapp, mengubah warna toggle icon whatsapp, dll

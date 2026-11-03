@@ -1,0 +1,96 @@
+# ============================================================
+# .gitignore — Sukabumi Drive
+# File/folder berikut tidak perlu masuk repository.
+# Catatan: file yang sudah terlanjur di-track Git tidak otomatis
+# hilang dari repo; perlu `git rm --cached <file>` (tanpa commit
+# oleh agent ini).
+# ============================================================
+
+# --- Dependensi -------------------------------------------------
+node_modules/
+.pnp
+.pnp.*
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# --- Environment & secret --------------------------------------
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+
+# --- Hasil build -------------------------------------------------
+dist/
+build/
+client/dist/
+server/dist/
+.vite/
+.turbo/
+*.tsbuildinfo
+
+# --- Upload runtime ---------------------------------------------
+# Foto hasil upload user tidak perlu ikut Git.
+src/uploads/*
+server/src/uploads/*
+!src/uploads/.gitkeep
+!server/src/uploads/.gitkeep
+
+# --- Database lokal ---------------------------------------------
+# File SQLite bersifat runtime; seed utama tetap dipertahankan.
+*.sqlite
+*.sqlite3
+*.db
+!src/db/katalogwa.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.db-journal
+*.db-wal
+*.db-shm
+
+# --- Log ---------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Cache & coverage -------------------------------------------
+.cache/
+.eslintcache
+.oxlintcache
+.stylelintcache
+coverage/
+.nyc_output/
+
+# --- OS & editor -------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# --- File sementara ---------------------------------------------
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.local

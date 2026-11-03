@@ -1,0 +1,165 @@
+{
+  "settings": {
+    "storeName": "Sukabumi Drive",
+    "tagline": "Rental mobil harian di Sukabumi — lepas kunci atau dengan driver.",
+    "address": "Jl. Raya Cibadak No. 88, Sukabumi, Jawa Barat",
+    "phone": "081234567890",
+    "slug": "sukabumi-drive",
+    "currency": "IDR",
+    "activeWhatsApp": true,
+    "operationalHours": "08.00–21.00 WIB",
+    "instagram": "@sukabumidrive",
+    "rentalNote": "Lepas kunci wajib KTP dan SIM A. BBM, tol, dan parkir di luar tarif sewa."
+  },
+  "admin": {
+    "id": "admin_1",
+    "name": "Admin Sukabumi Drive",
+    "email": "admin@sukabumidrive.id",
+    "password": "password123"
+  },
+
+  "categories": [
+    {
+      "id": "cat_1",
+      "name": "City Car",
+      "slug": "city-car"
+    },
+    {
+      "id": "cat_2",
+      "name": "MPV",
+      "slug": "mpv"
+    },
+    {
+      "id": "cat_3",
+      "name": "SUV",
+      "slug": "suv"
+    },
+    {
+      "id": "cat_4",
+      "name": "Premium",
+      "slug": "premium"
+    }
+  ],
+
+  "products": [
+    {
+      "id": "car_1",
+      "name": "Toyota Agya",
+      "categoryId": "cat_1",
+      "categoryName": "City Car",
+      "price": 275000,
+      "driverFee": 150000,
+      "minRental": 1,
+      "stockStatus": "Tersedia",
+      "transmission": "Matic",
+      "seats": 5,
+      "fuel": "Bensin",
+      "modelYear": 2023,
+      "description": "City car ringkas dan irit untuk mobilitas harian di dalam kota. Mudah parkir, cocok untuk perjalanan berdua.",
+      "image": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=80",
+      "createdAt": "2024-06-01T10:00:00Z"
+    },
+    {
+      "id": "car_2",
+      "name": "Honda Brio",
+      "categoryId": "cat_1",
+      "categoryName": "City Car",
+      "price": 285000,
+      "driverFee": 150000,
+      "minRental": 1,
+      "stockStatus": "Tersedia",
+      "transmission": "Matic",
+      "seats": 5,
+      "fuel": "Bensin",
+      "modelYear": 2023,
+      "description": "Hatchback lincah dengan kabin nyaman. Pilihan hemat untuk rute dalam kota dan sekitarnya.",
+      "image": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80",
+      "createdAt": "2024-06-02T11:30:00Z"
+    },
+    {
+      "id": "car_3",
+      "name": "Toyota Avanza",
+      "categoryId": "cat_2",
+      "categoryName": "MPV",
+      "price": 425000,
+      "driverFee": 175000,
+      "minRental": 1,
+      "stockStatus": "Tersedia",
+      "transmission": "Manual",
+      "seats": 7,
+      "fuel": "Bensin",
+      "modelYear": 2022,
+      "description": "MPV keluarga dengan kabin lega. Nyaman untuk perjalanan luar kota bersama rombongan kecil.",
+      "image": "https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1200&q=80",
+      "createdAt": "2024-06-03T09:15:00Z"
+    },
+    {
+      "id": "car_4",
+      "name": "Mitsubishi Xpander",
+      "categoryId": "cat_2",
+      "categoryName": "MPV",
+      "price": 475000,
+      "driverFee": 175000,
+      "minRental": 1,
+      "stockStatus": "Tersedia",
+      "transmission": "Matic",
+      "seats": 7,
+      "fuel": "Bensin",
+      "modelYear": 2023,
+      "description": "MPV modern dengan suspensi empuk dan bagasi luas. Cocok untuk trip keluarga ke Pelabuhan Ratu.",
+      "image": "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80",
+      "createdAt": "2024-06-04T14:45:00Z"
+    },
+    {
+      "id": "car_5",
+      "name": "Honda HR-V",
+      "categoryId": "cat_3",
+      "categoryName": "SUV",
+      "price": 550000,
+      "driverFee": 200000,
+      "minRental": 2,
+      "stockStatus": "Disewa",
+      "transmission": "Matic",
+      "seats": 5,
+      "fuel": "Bensin",
+      "modelYear": 2023,
+      "description": "SUV kompak dengan posisi berkendara tinggi. Stabil untuk perjalanan dalam dan luar kota.",
+      "image": "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80",
+      "createdAt": "2024-06-05T08:20:00Z"
+    },
+    {
+      "id": "car_6",
+      "name": "Toyota Fortuner",
+      "categoryId": "cat_3",
+      "categoryName": "SUV",
+      "price": 950000,
+      "driverFee": 250000,
+      "minRental": 2,
+      "stockStatus": "Tersedia",
+      "transmission": "Matic",
+      "seats": 7,
+      "fuel": "Diesel",
+      "modelYear": 2022,
+      "description": "SUV tangguh untuk medan menantang dan rombongan. Kabin lapang dengan tenaga diesel.",
+      "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80",
+      "createdAt": "2024-06-06T16:10:00Z"
+    },
+    {
+      "id": "car_7",
+      "name": "Toyota Innova Zenix",
+      "categoryId": "cat_4",
+      "categoryName": "Premium",
+      "price": 850000,
+      "driverFee": 250000,
+      "minRental": 2,
+      "stockStatus": "Tersedia",
+      "transmission": "Matic",
+      "seats": 7,
+      "fuel": "Hybrid",
+      "modelYear": 2024,
+      "description": "MPV premium dengan kabin senyap dan kursi nyaman. Pilihan untuk perjalanan bisnis atau keluarga.",
+      "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80",
+      "createdAt": "2024-06-07T12:00:00Z"
+    }
+  ]
+}

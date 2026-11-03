@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Ilustrasi mobil">
+  <rect width="1200" height="800" fill="#e8e0d3"/>
+  <circle cx="950" cy="180" r="240" fill="#dde4d7"/>
+  <path d="M0 610h1200v190H0z" fill="#d7d0c2"/>
+  <path d="M217 566c16-65 73-112 140-112h122c37 0 72 16 96 44l54 62h173c53 0 96 43 96 96v34H217v-124z" fill="#fffdf7" stroke="#14211d" stroke-width="10"/>
+  <path d="M397 462h96c25 0 48 11 64 30l44 52H331c5-43 33-82 66-82z" fill="#dde4d7" stroke="#14211d" stroke-width="10"/>
+  <circle cx="376" cy="690" r="58" fill="#14211d"/>
+  <circle cx="376" cy="690" r="24" fill="#e8e0d3"/>
+  <circle cx="886" cy="690" r="58" fill="#14211d"/>
+  <circle cx="886" cy="690" r="24" fill="#e8e0d3"/>
+  <path d="M147 612h64M1009 590h52" stroke="#c9502c" stroke-width="12" stroke-linecap="round"/>
+</svg>
