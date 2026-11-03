@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const NAV_LINKS = [
   { name: 'Beranda', path: '/' },
-  { name: 'Tentang', path: '/#tentang' },
+  { name: 'Tentang', path: '/#area' },
   { name: 'Armada', path: '/products' },
 ]
 

@@ -5,7 +5,7 @@ import { api, formatPrice } from '../lib/api'
 import { onImageError, productImage } from '../lib/images'
 
 const inputClass =
-  'h-12 w-full rounded-xl border border-line bg-bone px-3.5 text-sm font-medium text-ink outline-none transition placeholder:text-muted/70 focus:border-rust/60'
+  'h-12 w-full rounded-xl border border-line bg-bone px-3.5 text-sm font-medium text-ink outline-none transition duration-200 placeholder:text-muted/70 focus:border-[#3c83f6] focus:ring-2 focus:ring-[#3c83f6]/20'
 const labelClass =
   'mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-ink-soft'
 
@@ -25,19 +25,29 @@ function storeToForm(store) {
   }
 }
 
+function MacDots({ className = '' }) {
+  return (
+    <div className={`flex items-center gap-1.5 ${className}`}>
+      <span className="size-2.5 rounded-full bg-[#ff5f56] transition-transform duration-200 hover:scale-125" />
+      <span className="size-2.5 rounded-full bg-[#ffbd2e] transition-transform duration-200 hover:scale-125" />
+      <span className="size-2.5 rounded-full bg-[#27c93f] transition-transform duration-200 hover:scale-125" />
+    </div>
+  )
+}
+
 function StatusBadge({ status }) {
   const available = status === 'Tersedia'
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.12em] ${
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.12em] transition-all duration-200 ${
         available
-          ? 'bg-[#dbeafe] text-[#1d4ed8]'
-          : 'bg-[#bfdbfe] text-[#1e3a8a]'
+          ? 'bg-[#dbeafe] text-[#1d4ed8] hover:bg-[#bfdbfe]'
+          : 'bg-[#fef3c7] text-[#b45309] hover:bg-[#fde68a]'
       }`}
     >
       <span
-        className={`size-1.5 rounded-full ${
-          available ? 'bg-[#1d4ed8]' : 'bg-[#60a5fa]'
+        className={`size-1.5 rounded-full animate-pulse ${
+          available ? 'bg-[#1d4ed8]' : 'bg-[#d97706]'
         }`}
       />
       {available ? 'Tersedia' : 'Disewa'}
@@ -166,14 +176,18 @@ export default function AdminDashboard({
 
   return (
     <main className="mx-auto w-full max-w-[1240px] px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-      <section className="overflow-hidden rounded-[1.85rem] border border-line bg-bone/80 shadow-card">
-        <div className="border-b border-line/80 bg-paper/55 px-5 py-6 sm:px-7 sm:py-8">
+      {/* Container Utama Berkas Gaya macOS */}
+      <section className="overflow-hidden rounded-[1.85rem] border border-line bg-bone/90 shadow-xl backdrop-blur-md transition-all duration-300">
+        
+        {/* Header Dashboard */}
+        <div className="border-b border-line/80 bg-paper/70 px-5 py-6 sm:px-7 sm:py-8">
+          <MacDots className="mb-4" />
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-rust">
                 Dashboard admin
               </p>
-              <h1 className="mt-3 font-display text-[2.4rem] font-semibold leading-[0.95] tracking-[-0.05em] sm:text-5xl">
+              <h1 className="mt-2 font-display text-[2.4rem] font-semibold leading-[0.95] tracking-[-0.05em] sm:text-5xl">
                 Kelola armada.
               </h1>
               <p className="mt-3 max-w-xl text-sm leading-6 text-muted">
@@ -184,7 +198,7 @@ export default function AdminDashboard({
             <button
               type="button"
               onClick={() => onRefresh()}
-              className="inline-flex w-fit items-center gap-2 rounded-full border border-line bg-bone px-4 py-2.5 text-xs font-bold uppercase tracking-[0.1em] text-ink-soft transition hover:border-ink/30 hover:bg-paper-deep"
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-line bg-bone px-4 py-2.5 text-xs font-bold uppercase tracking-[0.1em] text-ink-soft shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-ink/30 hover:bg-paper-deep hover:shadow"
             >
               <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
                 <path
@@ -200,7 +214,8 @@ export default function AdminDashboard({
             </button>
           </div>
 
-          <div className="mt-7 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {/* Kartu Statistik Ringkas */}
+          <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
               { label: 'Total unit', value: products.length },
               { label: 'Tersedia', value: readyCount },
@@ -209,12 +224,13 @@ export default function AdminDashboard({
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-line/80 bg-bone/80 px-4 py-3"
+                className="group rounded-2xl border border-line/80 bg-bone/80 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#3c83f6]/40 hover:bg-white hover:shadow-md"
               >
+                <MacDots className="mb-2 opacity-60 transition-opacity group-hover:opacity-100" />
                 <p className="text-[0.58rem] font-medium uppercase tracking-[0.16em] text-muted">
                   {stat.label}
                 </p>
-                <p className="mt-1 font-display text-3xl font-semibold leading-none tracking-[-0.04em]">
+                <p className="mt-1 font-display text-3xl font-semibold leading-none tracking-[-0.04em] text-ink">
                   {stat.value}
                 </p>
               </div>
@@ -222,22 +238,25 @@ export default function AdminDashboard({
           </div>
         </div>
 
+        {/* Konten Utama Berdasarkan Tab */}
         <div className="p-5 sm:p-7">
           {notice ? (
             <div
-              className={`mb-5 rounded-xl border px-4 py-3 text-sm leading-6 ${
+              className={`mb-5 flex items-center gap-2.5 rounded-xl border px-4 py-3 text-sm leading-6 shadow-sm transition-all duration-300 ${
                 notice.type === 'success'
-                  ? 'border-success/25 bg-success/10 text-success'
-                  : 'border-danger/25 bg-danger/10 text-danger'
+                  ? 'border-success/30 bg-success/10 text-success'
+                  : 'border-danger/30 bg-danger/10 text-danger'
               }`}
               role="status"
             >
-              {notice.text}
+              <MacDots />
+              <span className="font-medium">{notice.text}</span>
             </div>
           ) : null}
 
+          {/* TAB 1: DAFTAR MOBIL */}
           {tab === 'products' ? (
-            <section>
+            <section className="space-y-5">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <h2 className="font-display text-2xl font-semibold tracking-[-0.04em]">
@@ -250,7 +269,7 @@ export default function AdminDashboard({
                 <button
                   type="button"
                   onClick={() => setEditing(null)}
-                  className="inline-flex w-fit items-center gap-2 rounded-full bg-ink px-4 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone transition hover:bg-rust"
+                  className="inline-flex w-fit items-center gap-2 rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone shadow-md transition duration-200 hover:-translate-y-0.5 hover:bg-rust hover:shadow-lg"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -271,7 +290,8 @@ export default function AdminDashboard({
               </div>
 
               {products.length === 0 ? (
-                <div className="mt-6 rounded-2xl border border-dashed border-line-strong bg-paper/45 px-6 py-12 text-center">
+                <div className="mt-6 rounded-2xl border border-dashed border-line-strong bg-paper/45 px-6 py-12 text-center transition-all">
+                  <MacDots className="justify-center mb-4" />
                   <p className="font-display text-2xl font-semibold">
                     Armada masih kosong.
                   </p>
@@ -282,25 +302,27 @@ export default function AdminDashboard({
                   <button
                     type="button"
                     onClick={() => setEditing(null)}
-                    className="mt-5 rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone transition hover:bg-rust"
+                    className="mt-5 rounded-full bg-ink px-6 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone transition hover:bg-rust"
                   >
                     Tambah mobil
                   </button>
                 </div>
               ) : (
-                <div className="mt-5 overflow-hidden rounded-2xl border border-line bg-bone">
+                <div className="overflow-hidden rounded-2xl border border-line bg-bone shadow-sm">
                   {products.map((product) => (
                     <div
                       key={product.id}
-                      className="flex flex-col gap-4 border-b border-line/80 p-4 last:border-b-0 sm:flex-row sm:items-center"
+                      className="group flex flex-col gap-4 border-b border-line/80 p-4 transition duration-200 hover:bg-paper/40 last:border-b-0 sm:flex-row sm:items-center"
                     >
                       <div className="flex min-w-0 flex-1 items-center gap-4">
-                        <img
-                          src={productImage(product)}
-                          alt={product.name}
-                          onError={onImageError}
-                          className="h-20 w-28 shrink-0 rounded-xl bg-paper-deep object-cover"
-                        />
+                        <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl bg-paper-deep">
+                          <img
+                            src={productImage(product)}
+                            alt={product.name}
+                            onError={onImageError}
+                            className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
                         <div className="min-w-0">
                           <div className="flex flex-wrap items-center gap-2">
                             <h3 className="font-display text-xl font-semibold leading-none tracking-[-0.04em]">
@@ -328,12 +350,12 @@ export default function AdminDashboard({
                         </div>
                       </div>
 
-                      <div className="flex shrink-0 items-center gap-1.5 sm:justify-end">
+                      <div className="flex shrink-0 items-center gap-2 sm:justify-end">
                         <button
                           type="button"
                           onClick={() => handleToggle(product)}
                           disabled={busy}
-                          className="rounded-full border border-line bg-paper px-3 py-2 text-[0.62rem] font-bold uppercase tracking-[0.08em] text-ink-soft transition hover:border-ink/30 hover:bg-paper-deep disabled:opacity-50"
+                          className="rounded-full border border-line bg-paper px-3.5 py-2 text-[0.62rem] font-bold uppercase tracking-[0.08em] text-ink-soft transition duration-200 hover:border-ink/30 hover:bg-paper-deep disabled:opacity-50"
                         >
                           {product.stockStatus === 'Tersedia'
                             ? 'Set disewa'
@@ -342,7 +364,7 @@ export default function AdminDashboard({
                         <button
                           type="button"
                           onClick={() => setEditing(product)}
-                          className="rounded-full border border-line bg-bone px-3 py-2 text-[0.62rem] font-bold uppercase tracking-[0.08em] text-ink transition hover:border-ink/30 hover:bg-paper"
+                          className="rounded-full border border-line bg-bone px-3.5 py-2 text-[0.62rem] font-bold uppercase tracking-[0.08em] text-ink transition duration-200 hover:border-ink/30 hover:bg-paper"
                         >
                           Edit
                         </button>
@@ -357,7 +379,7 @@ export default function AdminDashboard({
                               confirmLabel: 'Hapus mobil',
                             })
                           }
-                          className="rounded-full border border-danger/20 bg-danger/5 px-3 py-2 text-[0.62rem] font-bold uppercase tracking-[0.08em] text-danger transition hover:bg-danger/10"
+                          className="rounded-full border border-danger/20 bg-danger/5 px-3.5 py-2 text-[0.62rem] font-bold uppercase tracking-[0.08em] text-danger transition duration-200 hover:bg-danger/15"
                         >
                           Hapus
                         </button>
@@ -369,8 +391,9 @@ export default function AdminDashboard({
             </section>
           ) : null}
 
+          {/* TAB 2: KATEGORI */}
           {tab === 'categories' ? (
-            <section>
+            <section className="space-y-5">
               <div>
                 <h2 className="font-display text-2xl font-semibold tracking-[-0.04em]">
                   Kategori armada
@@ -381,7 +404,7 @@ export default function AdminDashboard({
               </div>
 
               <form
-                className="mt-5 flex flex-col gap-2 rounded-2xl border border-line bg-paper/50 p-3 sm:flex-row"
+                className="flex flex-col gap-2 rounded-2xl border border-line bg-paper/50 p-4 shadow-sm transition sm:flex-row"
                 onSubmit={handleAddCategory}
               >
                 <label className="sr-only" htmlFor="kategori-baru">
@@ -399,18 +422,19 @@ export default function AdminDashboard({
                 <button
                   type="submit"
                   disabled={busy || !newCategory.trim()}
-                  className="shrink-0 rounded-xl bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone transition hover:bg-rust disabled:opacity-50"
+                  className="shrink-0 rounded-xl bg-ink px-6 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone transition hover:bg-rust disabled:opacity-50"
                 >
                   Tambah
                 </button>
               </form>
 
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 {categories.map((category) => (
                   <div
                     key={category.id}
-                    className="rounded-2xl border border-line bg-bone p-4"
+                    className="group rounded-2xl border border-line bg-bone p-4 shadow-sm transition-all duration-200 hover:border-line-strong hover:shadow"
                   >
+                    <MacDots className="mb-3" />
                     {editingCategory?.id === category.id ? (
                       <form
                         className="flex gap-2"
@@ -451,11 +475,11 @@ export default function AdminDashboard({
                           <p className="font-display text-lg font-semibold tracking-[-0.02em]">
                             {category.name}
                           </p>
-                          <p className="mt-1 text-[0.62rem] uppercase tracking-[0.14em] text-muted">
+                          <p className="mt-1 text-[0.62rem] font-medium uppercase tracking-[0.14em] text-muted">
                             {category.productCount || 0} mobil
                           </p>
                         </div>
-                        <div className="flex shrink-0 gap-1.5">
+                        <div className="flex shrink-0 gap-2">
                           <button
                             type="button"
                             onClick={() =>
@@ -482,7 +506,7 @@ export default function AdminDashboard({
                                 confirmLabel: 'Hapus kategori',
                               })
                             }
-                            className="rounded-full border border-danger/20 bg-danger/5 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.08em] text-danger transition hover:bg-danger/10"
+                            className="rounded-full border border-danger/20 bg-danger/5 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.08em] text-danger transition hover:bg-danger/15"
                           >
                             Hapus
                           </button>
@@ -495,8 +519,9 @@ export default function AdminDashboard({
             </section>
           ) : null}
 
+          {/* TAB 3: INFORMASI TOKO */}
           {tab === 'store' ? (
-            <section>
+            <section className="space-y-5">
               <div>
                 <h2 className="font-display text-2xl font-semibold tracking-[-0.04em]">
                   Informasi toko
@@ -506,7 +531,12 @@ export default function AdminDashboard({
                 </p>
               </div>
 
-              <form className="mt-5 space-y-5" onSubmit={handleSaveStore}>
+              <form
+                className="rounded-2xl border border-line bg-bone p-5 shadow-sm space-y-5"
+                onSubmit={handleSaveStore}
+              >
+                <MacDots />
+
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className={labelClass} htmlFor="toko-nama">
@@ -578,7 +608,7 @@ export default function AdminDashboard({
                         address: event.target.value,
                       }))
                     }
-                    className="min-h-24 w-full resize-y rounded-xl border border-line bg-bone px-3.5 py-3 text-sm font-medium leading-6 text-ink outline-none transition focus:border-rust/60"
+                    className="min-h-24 w-full resize-y rounded-xl border border-line bg-bone px-3.5 py-3 text-sm font-medium leading-6 text-ink outline-none transition duration-200 focus:border-[#3c83f6] focus:ring-2 focus:ring-[#3c83f6]/20"
                   />
                 </div>
 
@@ -634,7 +664,7 @@ export default function AdminDashboard({
                         rentalNote: event.target.value,
                       }))
                     }
-                    className="min-h-24 w-full resize-y rounded-xl border border-line bg-bone px-3.5 py-3 text-sm font-medium leading-6 text-ink outline-none transition focus:border-rust/60"
+                    className="min-h-24 w-full resize-y rounded-xl border border-line bg-bone px-3.5 py-3 text-sm font-medium leading-6 text-ink outline-none transition duration-200 focus:border-[#3c83f6] focus:ring-2 focus:ring-[#3c83f6]/20"
                   />
                 </div>
 
@@ -658,7 +688,7 @@ export default function AdminDashboard({
                     />
                   </div>
 
-                  <label className="flex items-center gap-3 self-end rounded-xl border border-line bg-paper/50 px-4 py-3">
+                  <label className="flex cursor-pointer items-center gap-3 self-end rounded-xl border border-line bg-paper/50 px-4 py-3 transition hover:bg-paper">
                     <input
                       type="checkbox"
                       checked={storeForm.activeWhatsApp}
@@ -670,7 +700,7 @@ export default function AdminDashboard({
                       }
                       className="peer sr-only"
                     />
-                    <span className="relative h-6 w-11 shrink-0 rounded-full bg-line-strong transition after:absolute after:left-1 after:top-1 after:size-4 after:rounded-full after:bg-bone after:transition after:content-[''] peer-checked:bg-success peer-checked:after:translate-x-5" />
+                    <span className="relative h-6 w-11 shrink-0 rounded-full bg-line-strong transition-colors duration-200 after:absolute after:left-1 after:top-1 after:size-4 after:rounded-full after:bg-bone after:shadow-sm after:transition-transform after:duration-200 after:content-[''] peer-checked:bg-success peer-checked:after:translate-x-5" />
                     <span>
                       <span className="block text-xs font-bold uppercase tracking-[0.1em] text-ink">
                         WhatsApp aktif
@@ -686,7 +716,7 @@ export default function AdminDashboard({
                   <button
                     type="submit"
                     disabled={savingStore || busy}
-                    className="rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone transition hover:bg-rust disabled:opacity-60"
+                    className="rounded-full bg-ink px-6 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone shadow-md transition duration-200 hover:-translate-y-0.5 hover:bg-rust hover:shadow-lg disabled:opacity-60"
                   >
                     {savingStore ? 'Menyimpan…' : 'Simpan info toko'}
                   </button>

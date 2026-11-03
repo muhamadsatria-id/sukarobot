@@ -167,8 +167,8 @@ export default function Footer({ store, whatsapp, onNavigate }) {
                 <li>
                   <a
                     className="transition hover:text-white"
-                    href="/#tentang"
-                    onClick={(event) => handleNavigate(event, '/#tentang')}
+                    href="/#area"
+                    onClick={(event) => handleNavigate(event, '/#area')}
                   >
                     Tentang
                   </a>

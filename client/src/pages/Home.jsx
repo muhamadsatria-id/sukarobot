@@ -39,7 +39,7 @@ function getLocation() {
 
   return {
     page: 'home',
-    path: window.location.hash === '#tentang' ? '/#tentang' : '/',
+    path: window.location.hash === '#area' ? '/#area' : '/',
   }
 }
 
