@@ -232,7 +232,10 @@ export default function Home() {
           activeTab={adminTab}
           onTabChange={setAdminTab}
           onLogout={handleLogout}
+          onViewSite={() => navigate('/')}
           store={store}
+          productCount={products.length}
+          categoryCount={categories.length}
         >
           <AdminDashboard
             token={token}

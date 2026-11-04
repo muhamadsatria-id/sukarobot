@@ -2,6 +2,16 @@ import { useState } from 'react'
 import Modal from './Modal'
 import { api } from '../lib/api'
 
+function MacDots({ className = '' }) {
+  return (
+    <div className={`flex items-center gap-1.5 ${className}`}>
+      <span className="size-2.5 rounded-full bg-[#ff5f56] transition-transform duration-200 hover:scale-125" />
+      <span className="size-2.5 rounded-full bg-[#ffbd2e] transition-transform duration-200 hover:scale-125" />
+      <span className="size-2.5 rounded-full bg-[#27c93f] transition-transform duration-200 hover:scale-125" />
+    </div>
+  )
+}
+
 export default function AdminLoginModal({ open, onClose, onSuccess }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -27,22 +37,30 @@ export default function AdminLoginModal({ open, onClose, onSuccess }) {
     }
   }
 
+  const modalTitle = (
+    <div>
+      <MacDots className="mb-3" />
+      <span>Masuk sebagai admin</span>
+    </div>
+  )
+
   return (
     <Modal
       open={open}
       onClose={onClose}
-      title="Masuk sebagai admin"
+      title={modalTitle}
       description="Kelola armada, tarif, kategori, dan informasi rental."
       size="sm"
     >
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="mt-2 space-y-4" onSubmit={handleSubmit}>
         {error ? (
-          <p
-            className="rounded-xl border border-danger/25 bg-danger/10 px-4 py-3 text-sm leading-6 text-danger"
+          <div
+            className="flex items-center gap-2.5 rounded-xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm leading-6 text-danger shadow-sm"
             role="alert"
           >
-            {error}
-          </p>
+            <MacDots />
+            <span className="font-medium">{error}</span>
+          </div>
         ) : null}
 
         <div>
@@ -61,7 +79,7 @@ export default function AdminLoginModal({ open, onClose, onSuccess }) {
             autoComplete="username"
             autoFocus
             required
-            className="h-12 w-full rounded-xl border border-line bg-bone px-3.5 text-sm font-medium text-ink outline-none transition placeholder:text-muted/70 focus:border-rust/60"
+            className="h-12 w-full rounded-xl border border-line bg-bone px-3.5 text-sm font-medium text-ink outline-none transition-all duration-200 placeholder:text-muted/70 focus:border-[#3c83f6] focus:ring-2 focus:ring-[#3c83f6]/20"
           />
         </div>
 
@@ -80,22 +98,22 @@ export default function AdminLoginModal({ open, onClose, onSuccess }) {
             placeholder="••••••••"
             autoComplete="current-password"
             required
-            className="h-12 w-full rounded-xl border border-line bg-bone px-3.5 text-sm font-medium text-ink outline-none transition placeholder:text-muted/70 focus:border-rust/60"
+            className="h-12 w-full rounded-xl border border-line bg-bone px-3.5 text-sm font-medium text-ink outline-none transition-all duration-200 placeholder:text-muted/70 focus:border-[#3c83f6] focus:ring-2 focus:ring-[#3c83f6]/20"
           />
         </div>
 
-        <div className="flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-end">
+        <div className="flex flex-col-reverse gap-2.5 pt-3 sm:flex-row sm:justify-end">
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full border border-line bg-paper px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-ink-soft transition hover:border-ink/30 hover:bg-paper-deep"
+            className="rounded-full border border-line bg-paper px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-ink-soft shadow-sm transition-all duration-200 hover:border-ink/30 hover:bg-paper-deep"
           >
             Batal
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone transition hover:bg-rust disabled:opacity-60"
+            className="rounded-full bg-ink px-6 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#3c83f6] hover:shadow-lg disabled:opacity-60"
           >
             {loading ? 'Memeriksa…' : 'Masuk'}
           </button>

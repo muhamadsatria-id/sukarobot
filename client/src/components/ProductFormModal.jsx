@@ -4,12 +4,22 @@ import { api } from '../lib/api'
 import { onImageError, productImage } from '../lib/images'
 
 const inputClass =
-  'h-12 w-full rounded-xl border border-line bg-bone px-3.5 text-sm font-medium text-ink outline-none transition placeholder:text-muted/70 focus:border-rust/60'
+  'h-12 w-full rounded-xl border border-line bg-bone px-3.5 text-sm font-medium text-ink outline-none transition-all duration-200 placeholder:text-muted/70 focus:border-[#3c83f6] focus:ring-2 focus:ring-[#3c83f6]/20'
 const textareaClass =
-  'min-h-28 w-full resize-y rounded-xl border border-line bg-bone px-3.5 py-3 text-sm font-medium leading-6 text-ink outline-none transition placeholder:text-muted/70 focus:border-rust/60'
+  'min-h-28 w-full resize-y rounded-xl border border-line bg-bone px-3.5 py-3 text-sm font-medium leading-6 text-ink outline-none transition-all duration-200 placeholder:text-muted/70 focus:border-[#3c83f6] focus:ring-2 focus:ring-[#3c83f6]/20'
 const labelClass =
   'mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-ink-soft'
 const CURRENT_YEAR = new Date().getFullYear()
+
+function MacDots({ className = '' }) {
+  return (
+    <div className={`flex items-center gap-1.5 ${className}`}>
+      <span className="size-2.5 rounded-full bg-[#ff5f56] transition-transform duration-200 hover:scale-125" />
+      <span className="size-2.5 rounded-full bg-[#ffbd2e] transition-transform duration-200 hover:scale-125" />
+      <span className="size-2.5 rounded-full bg-[#27c93f] transition-transform duration-200 hover:scale-125" />
+    </div>
+  )
+}
 
 function initialForm(product, categories) {
   return {
@@ -147,37 +157,47 @@ export default function ProductFormModal({
     }
   }
 
+  const modalTitle = (
+    <div>
+      <MacDots className="mb-3" />
+      <span>{product ? `Edit ${product.name}` : 'Tambah mobil'}</span>
+    </div>
+  )
+
   return (
     <Modal
       open={open}
       onClose={onClose}
-      title={product ? `Edit ${product.name}` : 'Tambah mobil'}
+      title={modalTitle}
       description="Lengkapi data unit dan tarif sewa. Foto bisa diunggah atau memakai URL."
       size="lg"
     >
-      <form className="space-y-6" onSubmit={handleSubmit}>
+      <form className="mt-2 space-y-6" onSubmit={handleSubmit}>
         {error ? (
-          <p
-            className="rounded-xl border border-danger/25 bg-danger/10 px-4 py-3 text-sm leading-6 text-danger"
+          <div
+            className="flex items-center gap-2.5 rounded-xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm leading-6 text-danger shadow-sm"
             role="alert"
           >
-            {error}
-          </p>
+            <MacDots />
+            <span className="font-medium">{error}</span>
+          </div>
         ) : null}
 
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+          {/* Kolom Kiri: Pratinjau & Input Gambar (Tanpa MacDots) */}
           <div>
             <p className={labelClass}>Foto mobil</p>
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] border border-line bg-paper-deep">
+
+            <div className="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] border border-line bg-paper-deep shadow-sm">
               <img
                 src={preview}
                 alt="Pratinjau mobil"
                 onError={onImageError}
-                className="size-full object-cover"
+                className="size-full object-cover transition-transform duration-300 hover:scale-105"
               />
             </div>
 
-            <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-line-strong bg-paper/60 px-4 py-3 text-xs font-bold uppercase tracking-[0.1em] text-ink-soft transition hover:border-rust/50 hover:bg-bone">
+            <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-line-strong bg-paper/60 px-4 py-3 text-xs font-bold uppercase tracking-[0.1em] text-ink-soft shadow-sm transition-all duration-200 hover:border-[#3c83f6] hover:bg-bone hover:text-[#3c83f6]">
               <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
                 <path
                   d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"
@@ -221,6 +241,7 @@ export default function ProductFormModal({
             </div>
           </div>
 
+          {/* Kolom Kanan: Detail & Isian Form */}
           <div className="space-y-4">
             <div>
               <label className={labelClass} htmlFor="mobil-nama">
@@ -423,18 +444,19 @@ export default function ProductFormModal({
           </div>
         </div>
 
-        <div className="flex flex-col-reverse gap-2 border-t border-line/80 pt-5 sm:flex-row sm:justify-end">
+        {/* Action Buttons */}
+        <div className="flex flex-col-reverse gap-2.5 border-t border-line/80 pt-5 sm:flex-row sm:justify-end">
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full border border-line bg-paper px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-ink-soft transition hover:border-ink/30 hover:bg-paper-deep"
+            className="rounded-full border border-line bg-paper px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-ink-soft shadow-sm transition-all duration-200 hover:border-ink/30 hover:bg-paper-deep"
           >
             Batal
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="rounded-full bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone transition hover:bg-rust disabled:opacity-60"
+            className="rounded-full bg-ink px-6 py-3 text-xs font-bold uppercase tracking-[0.1em] text-bone shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#3c83f6] hover:shadow-lg disabled:opacity-60"
           >
             {saving
               ? 'Menyimpan…'
