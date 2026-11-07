@@ -1,6 +1,6 @@
 import petaBg from '../assets/peta-bg.svg'
 
-const ROUTES = [
+const DEFAULT_ROUTES = [
   { name: 'Pelabuhan Ratu', note: 'Pantai & liburan', distance: '± 60 km' },
   { name: 'Cibadak', note: 'Dalam kota', distance: '± 20 km' },
   { name: 'Bogor', note: 'Luar kota', distance: '± 90 km' },
@@ -8,7 +8,9 @@ const ROUTES = [
   { name: 'Jakarta', note: 'Antar-jemput', distance: '± 130 km' },
 ]
 
-export default function AreaSection({ store }) {
+export default function AreaSection({ store, routes }) {
+  const routeList = Array.isArray(routes) ? routes : DEFAULT_ROUTES
+
   return (
     <section
       id="area"
@@ -66,9 +68,9 @@ export default function AreaSection({ store }) {
                   className="rounded-2xl border border-line bg-bone/60 p-4 shadow-sm"
                 >
                   <div className="mb-3 flex items-center gap-1.5">
-                    <span className="size-2.5 rounded-full bg-[#ff5f56]" />
-                    <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
-                    <span className="size-2.5 rounded-full bg-[#27c93f]" />
+                    <span className="size-2.5 rounded-full bg-[#1e3a8a]" />
+                    <span className="size-2.5 rounded-full bg-[#3c83f6]" />
+                    <span className="size-2.5 rounded-full bg-[#93c5fd]" />
                   </div>
                   <dt className="text-[0.56rem] font-semibold uppercase tracking-[0.16em] text-muted">
                     {item.label}
@@ -84,9 +86,9 @@ export default function AreaSection({ store }) {
           {/* Kolom Kanan: Kartu Rute Utama */}
           <div className="relative rounded-[1.75rem] border border-line bg-bone p-5 shadow-card sm:p-6">
             <div className="mb-4 flex items-center gap-1.5">
-              <span className="size-3 rounded-full bg-[#ff5f56] shadow-sm" />
-              <span className="size-3 rounded-full bg-[#ffbd2e] shadow-sm" />
-              <span className="size-3 rounded-full bg-[#27c93f] shadow-sm" />
+              <span className="size-3 rounded-full bg-[#1e3a8a] shadow-sm" />
+              <span className="size-3 rounded-full bg-[#3c83f6] shadow-sm" />
+              <span className="size-3 rounded-full bg-[#93c5fd] shadow-sm" />
             </div>
 
             <div className="relative mb-5 h-32 overflow-hidden rounded-xl bg-moss">
@@ -126,25 +128,35 @@ export default function AreaSection({ store }) {
             </div>
 
             <ul className="mt-3">
-              {ROUTES.map((route) => (
-                <li
-                  key={route.name}
-                  className="flex items-center justify-between gap-4 border-t border-line/80 py-3.5"
-                >
-                  <div className="flex min-w-0 items-center gap-3">
-                    <span className="size-2 shrink-0 rounded-full bg-rust" />
-                    <span className="truncate font-semibold text-ink">
-                      {route.name}
-                    </span>
-                    <span className="hidden rounded-full bg-paper px-2 py-0.5 text-[0.52rem] uppercase tracking-[0.1em] text-muted sm:inline">
-                      {route.note}
-                    </span>
-                  </div>
-                  <span className="shrink-0 text-[0.62rem] text-muted">
-                    {route.distance}
-                  </span>
+              {routeList.length === 0 ? (
+                <li className="border-t border-line/80 py-5 text-sm text-muted">
+                  Rute populer belum ditambahkan.
                 </li>
-              ))}
+              ) : (
+                routeList.map((route) => (
+                  <li
+                    key={route.id ?? route.name}
+                    className="flex items-center justify-between gap-4 border-t border-line/80 py-3.5"
+                  >
+                    <div className="flex min-w-0 items-center gap-3">
+                      <span className="size-2 shrink-0 rounded-full bg-rust" />
+                      <span className="truncate font-semibold text-ink">
+                        {route.name}
+                      </span>
+                      {route.note ? (
+                        <span className="hidden rounded-full bg-paper px-2 py-0.5 text-[0.52rem] uppercase tracking-[0.1em] text-muted sm:inline">
+                          {route.note}
+                        </span>
+                      ) : null}
+                    </div>
+                    {route.distance ? (
+                      <span className="shrink-0 text-[0.62rem] text-muted">
+                        {route.distance}
+                      </span>
+                    ) : null}
+                  </li>
+                ))
+              )}
             </ul>
 
             <p className="mt-2 text-[0.68rem] leading-5 text-muted">

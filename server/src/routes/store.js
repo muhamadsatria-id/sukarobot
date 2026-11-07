@@ -1,6 +1,7 @@
 import express from "express";
 import { db } from "../db/db.js";
 import { authenticateToken } from "../middleware/auth.js";
+import { imageUpload } from "../lib/imageUpload.js";
 
 const router = express.Router();
 
@@ -26,6 +27,7 @@ router.put(`/`, authenticateToken, (req, res) => {
     operationalHours,
     instagram,
     rentalNote,
+    heroImage,
   } = req.body || {};
 
   const current = db.getSettings();
@@ -51,6 +53,7 @@ router.put(`/`, authenticateToken, (req, res) => {
     operationalHours: operationalHours ?? current.operationalHours,
     instagram: instagram ?? current.instagram,
     rentalNote: rentalNote ?? current.rentalNote,
+    heroImage: heroImage ?? current.heroImage ?? "",
   });
 
   res.json({
@@ -59,5 +62,30 @@ router.put(`/`, authenticateToken, (req, res) => {
     message: "Store settings updated successfully",
   });
 });
+
+// POST /api/stores/hero -> unggah foto background hero
+router.post(
+  "/hero",
+  authenticateToken,
+  imageUpload.single("image"),
+  (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Image file is required",
+      });
+    }
+
+    const updated = db.updateSettings({
+      heroImage: `/uploads/${req.file.filename}`,
+    });
+
+    res.json({
+      success: true,
+      data: updated,
+      message: "Hero background updated successfully",
+    });
+  },
+);
 
 export default router;

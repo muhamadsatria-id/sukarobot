@@ -1,4 +1,5 @@
-import { heroImage, onImageError } from '../lib/images'
+import { assetUrl } from '../lib/api'
+import { heroImage } from '../lib/images'
 
 function shortRupiah(value) {
   const amount = Number(value)
@@ -18,13 +19,22 @@ export default function HeroSection({
   startingPrice,
   readyCount,
 }) {
+  const backgroundImage = store?.heroImage
+    ? assetUrl(store.heroImage)
+    : heroImage
+
   return (
     <section className="relative overflow-hidden bg-ink">
       <img
-        src={heroImage}
+        src={backgroundImage}
         alt=""
         aria-hidden="true"
-        onError={onImageError}
+        onError={(event) => {
+          const image = event.currentTarget
+          if (image.dataset.fallback === 'true') return
+          image.dataset.fallback = 'true'
+          image.src = heroImage
+        }}
         className="absolute inset-0 size-full object-cover object-center"
       />
       <div className="absolute inset-0 bg-ink/75 lg:hidden" />

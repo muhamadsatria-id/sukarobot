@@ -8,6 +8,9 @@ import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/categories.js";
 import productRoutes from "./routes/products.js";
 import storeRoutes from "./routes/store.js";
+import userRoutes from "./routes/users.js";
+import popularRouteRoutes from "./routes/popularRoutes.js";
+import testimonialRoutes from "./routes/testimonials.js";
 
 dotenv.config();
 
@@ -65,6 +68,9 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/stores", storeRoutes);
 app.use("/api/store", storeRoutes); // alias supaya /api/store (tanpa s) juga jalan
+app.use("/api/users", userRoutes);
+app.use("/api/routes", popularRouteRoutes);
+app.use("/api/testimonials", testimonialRoutes);
 
 app.get("/api/health", (req, res) => {
   res.json({

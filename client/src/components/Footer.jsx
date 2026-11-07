@@ -46,12 +46,12 @@ export default function Footer({ store, whatsapp, onNavigate }) {
 
         {/* Lampu Depan Samping (Headlight Side Glow) */}
         <div className="absolute top-[76%] left-[6%] sm:left-[9%] -translate-y-1/2">
-          <div className="h-2 w-8 sm:w-14 rounded-full bg-cyan-300 shadow-[0_0_15px_#38bdf8] border border-white/60 animate-pulse" />
+          <div className="h-2 w-8 sm:w-14 rounded-full bg-blue-200 shadow-[0_0_15px_#93c5fd] border border-white/60 animate-pulse" />
         </div>
 
         {/* Lampu Belakang Samping (Taillight Side Glow) */}
         <div className="absolute top-[76%] right-[5%] sm:right-[8%] -translate-y-1/2">
-          <div className="h-2 w-6 sm:w-10 rounded-full bg-red-500 shadow-[0_0_15px_#ef4444]" />
+          <div className="h-2 w-6 sm:w-10 rounded-full bg-blue-400 shadow-[0_0_15px_#60a5fa]" />
         </div>
       </div>
 
@@ -221,7 +221,7 @@ export default function Footer({ store, whatsapp, onNavigate }) {
           </div>
 
           {/* Bagian Bawah: Garis Aspal & Copyright */}
-          <div className="mt-12 pt-6 border-t border-dashed border-white/20 flex flex-col gap-3 font-mono text-[0.56rem] uppercase tracking-[0.14em] text-blue-200/60 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-12 pt-6 border-t border-dashed border-white/20 flex flex-col gap-3 text-[0.56rem] uppercase tracking-[0.14em] text-blue-200/60 sm:flex-row sm:items-center sm:justify-between">
             <p>
               © {CURRENT_YEAR} {storeName}. Jalan jauh, tetap tenang.
             </p>

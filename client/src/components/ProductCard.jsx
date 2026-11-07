@@ -69,9 +69,9 @@ export default function ProductCard({
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         {/* Apple Dots di Kiri Atas (Di bawah foto) */}
         <div className="mb-3 flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-[#ff5f56]" />
-          <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
-          <span className="size-2.5 rounded-full bg-[#27c93f]" />
+          <span className="size-2.5 rounded-full bg-[#1e3a8a]" />
+          <span className="size-2.5 rounded-full bg-[#3c83f6]" />
+          <span className="size-2.5 rounded-full bg-[#93c5fd]" />
         </div>
 
         <div className="flex items-start justify-between gap-3">

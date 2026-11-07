@@ -68,6 +68,36 @@ export const api = {
   getStore: () => request('/api/stores'),
   saveStore: (data, token) =>
     request('/api/stores', { method: 'PUT', body: data, token }),
+  uploadHero: (formData, token) =>
+    request('/api/stores/hero', { method: 'POST', body: formData, token }),
+
+  getUsers: (token) => request('/api/users', { token }),
+  createUser: (data, token) =>
+    request('/api/users', { method: 'POST', body: data, token }),
+  updateUser: (id, data, token) =>
+    request(`/api/users/${id}`, { method: 'PUT', body: data, token }),
+  deleteUser: (id, token) =>
+    request(`/api/users/${id}`, { method: 'DELETE', token }),
+
+  getRoutes: () => request('/api/routes'),
+  createRoute: (data, token) =>
+    request('/api/routes', { method: 'POST', body: data, token }),
+  updateRoute: (id, data, token) =>
+    request(`/api/routes/${id}`, { method: 'PUT', body: data, token }),
+  deleteRoute: (id, token) =>
+    request(`/api/routes/${id}`, { method: 'DELETE', token }),
+
+  getTestimonials: () => request('/api/testimonials'),
+  createTestimonial: (data, token) =>
+    request('/api/testimonials', { method: 'POST', body: data, token }),
+  updateTestimonial: (id, data, token) =>
+    request(`/api/testimonials/${id}`, {
+      method: 'PUT',
+      body: data,
+      token,
+    }),
+  deleteTestimonial: (id, token) =>
+    request(`/api/testimonials/${id}`, { method: 'DELETE', token }),
 
   getCategories: () => request('/api/categories'),
   createCategory: (name, token) =>

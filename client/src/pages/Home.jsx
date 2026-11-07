@@ -16,13 +16,26 @@ import {
 
 
 async function fetchCatalog() {
-  const [storeResponse, categoriesResponse, productsResponse] =
-    await Promise.all([api.getStore(), api.getCategories(), api.getProducts()])
+  const [
+    storeResponse,
+    categoriesResponse,
+    productsResponse,
+    routesResponse,
+    testimonialsResponse,
+  ] = await Promise.all([
+    api.getStore(),
+    api.getCategories(),
+    api.getProducts(),
+    api.getRoutes(),
+    api.getTestimonials(),
+  ])
 
   return {
     store: storeResponse?.data ?? null,
     categories: categoriesResponse?.data ?? [],
     products: productsResponse?.data ?? [],
+    routes: routesResponse?.data ?? [],
+    testimonials: testimonialsResponse?.data ?? [],
   }
 }
 
@@ -49,6 +62,8 @@ export default function Home() {
   const [store, setStore] = useState(null)
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
+  const [routes, setRoutes] = useState([])
+  const [testimonials, setTestimonials] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
@@ -64,6 +79,8 @@ export default function Home() {
     setStore(data.store)
     setCategories(data.categories)
     setProducts(data.products)
+    setRoutes(data.routes ?? [])
+    setTestimonials(data.testimonials ?? [])
     setError('')
   }, [])
 
@@ -179,12 +196,15 @@ export default function Home() {
   const startingPrice = products.length
     ? Math.min(...products.map((product) => Number(product.price) || 0))
     : 0
-  const storeWhatsApp = store?.phone
-    ? whatsappLink(
-        store.phone,
-        `Halo ${storeName}, saya mau tanya sewa mobil di Sukabumi.`,
-      )
-    : ''
+  const whatsappActive =
+    store?.activeWhatsApp === true || store?.activeWhatsApp === 'true'
+  const storeWhatsApp =
+    whatsappActive && store?.phone
+      ? whatsappLink(
+          store.phone,
+          `Halo ${storeName}, saya mau tanya sewa mobil di Sukabumi.`,
+        )
+      : ''
 
 
   function handleLoginSuccess(response) {
@@ -209,6 +229,8 @@ export default function Home() {
     loading,
     products,
     categories,
+    routes,
+    testimonials,
     filteredProducts,
     search,
     setSearch,
@@ -236,12 +258,16 @@ export default function Home() {
           store={store}
           productCount={products.length}
           categoryCount={categories.length}
+          routeCount={routes.length}
+          testimonialCount={testimonials.length}
         >
           <AdminDashboard
             token={token}
             store={store}
             products={products}
             categories={categories}
+            routes={routes}
+            testimonials={testimonials}
             onRefresh={() => load({ quiet: true })}
             tab={adminTab}
             onTabChange={setAdminTab}

@@ -4,6 +4,9 @@ import AdminIcon from '../admin/AdminIcon'
 const ADMIN_TABS = [
   { id: 'products', label: 'Armada', icon: 'car' },
   { id: 'categories', label: 'Kategori', icon: 'tag' },
+  { id: 'routes', label: 'Rute populer', icon: 'route' },
+  { id: 'testimonials', label: 'Testimoni', icon: 'quote' },
+  { id: 'users', label: 'Pengguna', icon: 'users' },
   { id: 'store', label: 'Info toko', icon: 'store' },
 ]
 
@@ -62,6 +65,8 @@ export default function Sidebar({
   storeName,
   productCount = 0,
   categoryCount = 0,
+  routeCount = 0,
+  testimonialCount = 0,
   open = false,
   collapsed = false,
   onClose,
@@ -87,6 +92,8 @@ export default function Sidebar({
   const counts = {
     products: productCount,
     categories: categoryCount,
+    routes: routeCount,
+    testimonials: testimonialCount,
   }
 
   return (

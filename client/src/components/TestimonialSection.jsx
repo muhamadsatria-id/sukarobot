@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const DEFAULT_TESTIMONIALS = [
   {
@@ -33,9 +33,25 @@ const DEFAULT_TESTIMONIALS = [
   },
 ]
 
-export default function TestimonialSection({ testimonials = [] }) {
-  const data = testimonials.length > 0 ? testimonials : DEFAULT_TESTIMONIALS
+export default function TestimonialSection({
+  testimonials = [],
+  loading = false,
+}) {
+  const data =
+    testimonials.length > 0
+      ? testimonials
+      : loading
+        ? DEFAULT_TESTIMONIALS
+        : []
   const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    if (currentIndex > data.length - 1) {
+      setCurrentIndex(Math.max(0, data.length - 1))
+    }
+  }, [currentIndex, data.length])
+
+  if (data.length === 0) return null
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? data.length - 1 : prev - 1))
@@ -45,9 +61,17 @@ export default function TestimonialSection({ testimonials = [] }) {
     setCurrentIndex((prev) => (prev === data.length - 1 ? 0 : prev + 1))
   }
 
-  const current = data[currentIndex]
-  const formattedNumber = String(currentIndex + 1).padStart(2, '0')
+  const safeIndex = Math.min(currentIndex, data.length - 1)
+  const current = data[safeIndex]
+  const formattedNumber = String(safeIndex + 1).padStart(2, '0')
   const totalCount = String(data.length).padStart(2, '0')
+  const avatarInitials = String(current.name || 'T')
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase()
 
   return (
     <section
@@ -96,12 +120,18 @@ export default function TestimonialSection({ testimonials = [] }) {
                 </blockquote>
 
                 <div className="mt-8 flex items-center gap-4">
-                  <img
-                    src={current.avatar}
-                    alt={current.name}
-                    loading="lazy"
-                    className="size-12 shrink-0 rounded-full border-2 border-bone object-cover shadow-sm"
-                  />
+                  {current.avatar ? (
+                    <img
+                      src={current.avatar}
+                      alt={current.name}
+                      loading="lazy"
+                      className="size-12 shrink-0 rounded-full border-2 border-bone object-cover shadow-sm"
+                    />
+                  ) : (
+                    <span className="grid size-12 shrink-0 place-items-center rounded-full border-2 border-bone bg-leaf/10 text-sm font-bold text-leaf shadow-sm">
+                      {avatarInitials}
+                    </span>
+                  )}
                   <div>
                     <h3 className="text-base font-bold text-ink">
                       {current.name}
@@ -125,9 +155,9 @@ export default function TestimonialSection({ testimonials = [] }) {
                     type="button"
                     onClick={() => setCurrentIndex(index)}
                     aria-label={`Lihat testimoni ${index + 1}`}
-                    aria-current={index === currentIndex ? 'true' : undefined}
+                    aria-current={index === safeIndex ? 'true' : undefined}
                     className={`h-1 rounded-full transition-all duration-300 ${
-                      index === currentIndex
+                      index === safeIndex
                         ? 'w-10 bg-leaf'
                         : 'w-4 bg-line-strong/80 hover:bg-muted'
                     }`}

@@ -38,9 +38,9 @@ export default function AboutSection({ store }) {
               >
                 {/* Tiga Titik Lingkaran Apple / macOS */}
                 <div className="mb-3 flex items-center gap-1.5">
-                  <span className="size-2.5 rounded-full bg-[#ff5f56]" />
-                  <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
-                  <span className="size-2.5 rounded-full bg-[#27c93f]" />
+                  <span className="size-2.5 rounded-full bg-[#1e3a8a]" />
+                  <span className="size-2.5 rounded-full bg-[#3c83f6]" />
+                  <span className="size-2.5 rounded-full bg-[#93c5fd]" />
                 </div>
                 <dt className="text-[0.56rem] font-semibold uppercase tracking-[0.16em] text-muted">
                   {item.label}

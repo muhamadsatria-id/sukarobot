@@ -80,9 +80,9 @@ export default function OrderModal({
   const modalTitle = (
     <div>
       <div className="mb-3 flex items-center gap-1.5">
-        <span className="size-2.5 rounded-full bg-[#ff5f56]" />
-        <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
-        <span className="size-2.5 rounded-full bg-[#27c93f]" />
+        <span className="size-2.5 rounded-full bg-[#1e3a8a]" />
+        <span className="size-2.5 rounded-full bg-[#3c83f6]" />
+        <span className="size-2.5 rounded-full bg-[#93c5fd]" />
       </div>
       <span>{product ? `Sewa ${product.name}` : 'Sewa mobil'}</span>
     </div>
@@ -275,9 +275,9 @@ export default function OrderModal({
           {/* Kartu Ringkasan Sewa */}
           <aside className="flex flex-col rounded-[1.4rem] bg-ink p-5 text-bone sm:p-6">
             <div className="mb-4 flex items-center gap-1.5">
-              <span className="size-2.5 rounded-full bg-[#ff5f56]" />
-              <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
-              <span className="size-2.5 rounded-full bg-[#27c93f]" />
+              <span className="size-2.5 rounded-full bg-[#1e3a8a]" />
+              <span className="size-2.5 rounded-full bg-[#3c83f6]" />
+              <span className="size-2.5 rounded-full bg-[#93c5fd]" />
             </div>
 
             <div className="flex items-center justify-between gap-3">

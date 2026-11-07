@@ -9,6 +9,8 @@ export default function AdminLayout({
   store,
   productCount,
   categoryCount,
+  routeCount,
+  testimonialCount,
   children,
 }) {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -38,6 +40,8 @@ export default function AdminLayout({
           storeName={store?.storeName}
           productCount={productCount}
           categoryCount={categoryCount}
+          routeCount={routeCount}
+          testimonialCount={testimonialCount}
           open={mobileOpen}
           collapsed={collapsed}
           onClose={closeMobile}

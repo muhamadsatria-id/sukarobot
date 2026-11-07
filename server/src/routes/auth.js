@@ -31,9 +31,9 @@ router.post("/login", async (req, res) => {
     });
   }
 
-  const admin = db.getAdmin();
+  const admin = db.getAdminByEmail(email.trim().toLowerCase());
 
-  if (!admin || email.trim().toLowerCase() !== admin.email.toLowerCase()) {
+  if (!admin) {
     return res.status(401).json({
       success: false,
       message: "Invalid email or password",
@@ -55,9 +55,13 @@ router.post("/login", async (req, res) => {
     });
   }
 
-  const token = jwt.sign({ email: admin.email, name: admin.name }, JWT_SECRET, {
-    expiresIn: "24h",
-  });
+  const token = jwt.sign(
+    { id: admin.id, email: admin.email, name: admin.name },
+    JWT_SECRET,
+    {
+      expiresIn: "24h",
+    },
+  );
   return res.json({
     success: true,
     message: "Login successful",
@@ -71,7 +75,8 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/me", authenticateToken, (req, res) => {
-  const admin = db.getAdmin();
+  const admin =
+    db.getAdminById(req.user?.id) || db.getAdminByEmail(req.user?.email || "");
 
   if (!admin) {
     return res.status(404).json({

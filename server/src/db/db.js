@@ -73,6 +73,30 @@ class SqliteDatabase {
       );
     `);
 
+    // 5. Popular Routes Table
+    this.db.exec(`
+      CREATE TABLE IF NOT EXISTS routes (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        note TEXT,
+        distance TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // 6. Testimonials Table
+    this.db.exec(`
+      CREATE TABLE IF NOT EXISTS testimonials (
+        id TEXT PRIMARY KEY,
+        quote TEXT NOT NULL,
+        name TEXT NOT NULL,
+        role TEXT,
+        company TEXT,
+        avatar TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
     // Indexes
     this.db.exec(`
       CREATE INDEX IF NOT EXISTS idx_products_cat ON products(category_id);
@@ -191,6 +215,48 @@ class SqliteDatabase {
         );
       }
     }
+
+    // Seed Popular Routes
+    const existingRoutes = this.db
+      .prepare("SELECT COUNT(*) AS count FROM routes")
+      .get();
+    if (existingRoutes.count === 0 && Array.isArray(seedData.routes)) {
+      const insertRoute = this.db.prepare(
+        "INSERT INTO routes (id, name, note, distance) VALUES (?, ?, ?, ?)",
+      );
+      for (const route of seedData.routes) {
+        insertRoute.run(
+          route.id,
+          route.name,
+          route.note || "",
+          route.distance || "",
+        );
+      }
+    }
+
+    // Seed Testimonials
+    const existingTestimonials = this.db
+      .prepare("SELECT COUNT(*) AS count FROM testimonials")
+      .get();
+    if (
+      existingTestimonials.count === 0 &&
+      Array.isArray(seedData.testimonials)
+    ) {
+      const insertTestimonial = this.db.prepare(
+        `INSERT INTO testimonials (id, quote, name, role, company, avatar)
+         VALUES (?, ?, ?, ?, ?, ?)`,
+      );
+      for (const testimonial of seedData.testimonials) {
+        insertTestimonial.run(
+          testimonial.id,
+          testimonial.quote,
+          testimonial.name,
+          testimonial.role || "",
+          testimonial.company || "",
+          testimonial.avatar || "",
+        );
+      }
+    }
   }
 
   // --- Settings SQL Operations ---
@@ -215,11 +281,203 @@ class SqliteDatabase {
     return this.getSettings();
   }
 
+  // --- Popular Routes SQL Operations ---
+  getRoutes() {
+    return this.db
+      .prepare(
+        `SELECT id, name, note, distance, created_at AS createdAt
+         FROM routes
+         ORDER BY created_at ASC, rowid ASC`,
+      )
+      .all();
+  }
+
+  getRouteById(id) {
+    return this.db
+      .prepare(
+        "SELECT id, name, note, distance FROM routes WHERE id = ?",
+      )
+      .get(id);
+  }
+
+  addRoute({ name, note, distance }) {
+    const id = `route-${Date.now()}`;
+    this.db
+      .prepare(
+        "INSERT INTO routes (id, name, note, distance) VALUES (?, ?, ?, ?)",
+      )
+      .run(id, name, note || "", distance || "");
+    return { id, name, note: note || "", distance: distance || "" };
+  }
+
+  updateRoute(id, data) {
+    const current = this.getRouteById(id);
+    if (!current) return null;
+
+    const next = {
+      name: data.name ?? current.name,
+      note: data.note ?? current.note,
+      distance: data.distance ?? current.distance,
+    };
+
+    this.db
+      .prepare("UPDATE routes SET name = ?, note = ?, distance = ? WHERE id = ?")
+      .run(next.name, next.note, next.distance, id);
+
+    return { id, ...next };
+  }
+
+  deleteRoute(id) {
+    const res = this.db.prepare("DELETE FROM routes WHERE id = ?").run(id);
+    return res.changes > 0;
+  }
+
+  // --- Testimonial SQL Operations ---
+  getTestimonials() {
+    return this.db
+      .prepare(
+        `SELECT id, quote, name, role, company, avatar, created_at AS createdAt
+         FROM testimonials
+         ORDER BY created_at ASC, rowid ASC`,
+      )
+      .all();
+  }
+
+  getTestimonialById(id) {
+    return this.db
+      .prepare(
+        `SELECT id, quote, name, role, company, avatar
+         FROM testimonials WHERE id = ?`,
+      )
+      .get(id);
+  }
+
+  addTestimonial(data) {
+    const id = `testi-${Date.now()}`;
+    this.db
+      .prepare(
+        `INSERT INTO testimonials (id, quote, name, role, company, avatar)
+         VALUES (?, ?, ?, ?, ?, ?)`,
+      )
+      .run(
+        id,
+        data.quote,
+        data.name,
+        data.role || "",
+        data.company || "",
+        data.avatar || "",
+      );
+    return { id, ...data };
+  }
+
+  updateTestimonial(id, data) {
+    const current = this.getTestimonialById(id);
+    if (!current) return null;
+
+    const next = {
+      quote: data.quote ?? current.quote,
+      name: data.name ?? current.name,
+      role: data.role ?? current.role,
+      company: data.company ?? current.company,
+      avatar: data.avatar ?? current.avatar,
+    };
+
+    this.db
+      .prepare(
+        `UPDATE testimonials
+         SET quote = ?, name = ?, role = ?, company = ?, avatar = ?
+         WHERE id = ?`,
+      )
+      .run(next.quote, next.name, next.role, next.company, next.avatar, id);
+
+    return { id, ...next };
+  }
+
+  deleteTestimonial(id) {
+    const res = this.db.prepare("DELETE FROM testimonials WHERE id = ?").run(id);
+    return res.changes > 0;
+  }
+
   // --- Admin SQL Operations ---
   getAdmin() {
     return this.db
       .prepare("SELECT id, name, email, password FROM admins LIMIT 1")
       .get();
+  }
+
+  getAdminById(id) {
+    // Token lama bisa saja belum menyimpan id. Jangan teruskan nilai yang
+    // tidak bisa di-bind ke SQLite (undefined/object) ke prepared statement.
+    if (typeof id !== "string" && typeof id !== "number") return null;
+
+    return this.db
+      .prepare("SELECT id, name, email, password FROM admins WHERE id = ?")
+      .get(id);
+  }
+
+  getAdminByEmail(email) {
+    if (typeof email !== "string" || !email.trim()) return null;
+
+    return this.db
+      .prepare(
+        "SELECT id, name, email, password FROM admins WHERE LOWER(email) = LOWER(?)",
+      )
+      .get(email);
+  }
+
+  getAdmins() {
+    return this.db
+      .prepare(
+        `SELECT id, name, email, created_at AS createdAt
+         FROM admins
+         ORDER BY created_at ASC`,
+      )
+      .all();
+  }
+
+  countAdmins() {
+    return this.db.prepare("SELECT COUNT(*) AS count FROM admins").get().count;
+  }
+
+  addAdmin({ name, email, password }) {
+    const id = `admin-${Date.now()}`;
+    this.db
+      .prepare(
+        "INSERT INTO admins (id, name, email, password) VALUES (?, ?, ?, ?)",
+      )
+      .run(id, name, email, password);
+    return {
+      id,
+      name,
+      email,
+      createdAt: new Date().toISOString(),
+    };
+  }
+
+  updateAdmin(id, { name, email, password }) {
+    const current = this.getAdminById(id);
+    if (!current) return null;
+
+    const next = {
+      name: name ?? current.name,
+      email: email ?? current.email,
+      password: password ?? current.password,
+    };
+
+    this.db
+      .prepare("UPDATE admins SET name = ?, email = ?, password = ? WHERE id = ?")
+      .run(next.name, next.email, next.password, id);
+
+    return {
+      id,
+      name: next.name,
+      email: next.email,
+    };
+  }
+
+  deleteAdmin(id) {
+    const res = this.db.prepare("DELETE FROM admins WHERE id = ?").run(id);
+    return res.changes > 0;
   }
 
   // --- Category SQL Operations ---

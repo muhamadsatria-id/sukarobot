@@ -14,9 +14,9 @@ const CURRENT_YEAR = new Date().getFullYear()
 function MacDots({ className = '' }) {
   return (
     <div className={`flex items-center gap-1.5 ${className}`}>
-      <span className="size-2.5 rounded-full bg-[#ff5f56] transition-transform duration-200 hover:scale-125" />
-      <span className="size-2.5 rounded-full bg-[#ffbd2e] transition-transform duration-200 hover:scale-125" />
-      <span className="size-2.5 rounded-full bg-[#27c93f] transition-transform duration-200 hover:scale-125" />
+      <span className="size-2.5 rounded-full bg-[#1e3a8a] transition-transform duration-200 hover:scale-125" />
+      <span className="size-2.5 rounded-full bg-[#3c83f6] transition-transform duration-200 hover:scale-125" />
+      <span className="size-2.5 rounded-full bg-[#93c5fd] transition-transform duration-200 hover:scale-125" />
     </div>
   )
 }

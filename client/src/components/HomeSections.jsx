@@ -12,6 +12,8 @@ export default function HomeSections({ ctx }) {
     store,
     loading,
     products,
+    routes,
+    testimonials,
     rentalMode,
     currency,
     setOrderProduct,
@@ -41,9 +43,9 @@ export default function HomeSections({ ctx }) {
         onViewAll={onViewAll}
       />
       <CaraSewaSection storeWhatsApp={storeWhatsApp} />
-      <AreaSection />
+      <AreaSection store={store} routes={routes} />
       <FaqSection storeWhatsApp={storeWhatsApp} />
-      <TestimonialSection />
+      <TestimonialSection testimonials={testimonials} loading={loading} />
     </>
   )
 }

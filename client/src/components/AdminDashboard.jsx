@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 import ConfirmModal from './ConfirmModal'
 import ProductFormModal from './ProductFormModal'
-import { api, formatPrice } from '../lib/api'
+import HeroPanel from './admin/HeroPanel'
+import RoutesPanel from './admin/RoutesPanel'
+import TestimonialsPanel from './admin/TestimonialsPanel'
+import UsersPanel from './admin/UsersPanel'
+import { api, formatPrice, toWhatsAppNumber, whatsappLink } from '../lib/api'
 import { onImageError, productImage } from '../lib/images'
 import AdminIcon from './admin/AdminIcon'
 
@@ -51,6 +55,8 @@ export default function AdminDashboard({
   store,
   products,
   categories,
+  routes = [],
+  testimonials = [],
   onRefresh,
   tab: tabProp,
 }) {
@@ -62,7 +68,15 @@ export default function AdminDashboard({
   const [newCategory, setNewCategory] = useState('')
   const [editingCategory, setEditingCategory] = useState(null)
   const [storeForm, setStoreForm] = useState(() => storeToForm(store))
+  const [storeDirty, setStoreDirty] = useState(false)
   const [savingStore, setSavingStore] = useState(false)
+
+  // Isi formulir toko setelah data pertama kali termuat (mis. buka /admin
+  // langsung). Jangan timpa perubahan yang belum disimpan.
+  useEffect(() => {
+    if (!store || storeDirty) return
+    setStoreForm(storeToForm(store))
+  }, [store, storeDirty])
 
   // Notifikasi otomatis hilang setelah beberapa detik.
   useEffect(() => {
@@ -158,6 +172,7 @@ export default function AdminDashboard({
         token,
       )
       setStoreForm(storeToForm(response?.data ?? storeForm))
+      setStoreDirty(false)
       await onRefresh()
       setNotice({ type: 'success', text: 'Informasi toko disimpan.' })
     } catch (error) {
@@ -186,6 +201,14 @@ export default function AdminDashboard({
     .map((word) => word[0])
     .join('')
     .toUpperCase()
+
+  const waNumber = toWhatsAppNumber(storeForm.phone)
+  const waPreview = waNumber
+    ? whatsappLink(
+        storeForm.phone,
+        `Halo ${storeForm.storeName || 'Sukabumi Drive'}, saya mau tanya sewa mobil.`,
+      )
+    : ''
 
   const stats = [
     {
@@ -226,7 +249,7 @@ export default function AdminDashboard({
             Dashboard
           </h1>
           <p className="mt-1.5 text-sm text-muted">
-            Selamat datang kembali. Kelola armada dan informasi toko dari satu
+            Selamat datang kembali. Kelola armada, konten, dan akun dari satu
             tempat.
           </p>
         </div>
@@ -656,9 +679,35 @@ export default function AdminDashboard({
         </section>
       ) : null}
 
-      {/* TAB 3: INFORMASI TOKO */}
+      {/* TAB 3: RUTE POPULER */}
+      {tab === 'routes' ? (
+        <RoutesPanel
+          routes={routes}
+          token={token}
+          onRefresh={onRefresh}
+          onNotice={setNotice}
+        />
+      ) : null}
+
+      {/* TAB 4: TESTIMONI */}
+      {tab === 'testimonials' ? (
+        <TestimonialsPanel
+          testimonials={testimonials}
+          token={token}
+          onRefresh={onRefresh}
+          onNotice={setNotice}
+        />
+      ) : null}
+
+      {/* TAB 5: PENGGUNA ADMIN */}
+      {tab === 'users' ? (
+        <UsersPanel token={token} onNotice={setNotice} />
+      ) : null}
+
+      {/* TAB 6: INFORMASI TOKO */}
       {tab === 'store' ? (
-        <section className="rounded-xl border border-line bg-bone shadow-card">
+        <div className="space-y-6">
+          <section className="rounded-xl border border-line bg-bone shadow-card">
           <div className="border-b border-line px-5 py-4 sm:px-6">
             <h2 className="font-display text-lg font-semibold tracking-[-0.02em] text-ink">
               Informasi toko
@@ -668,7 +717,11 @@ export default function AdminDashboard({
             </p>
           </div>
 
-          <form className="space-y-5 p-5 sm:p-6" onSubmit={handleSaveStore}>
+          <form
+            className="space-y-5 p-5 sm:p-6"
+            onSubmit={handleSaveStore}
+            onChange={() => setStoreDirty(true)}
+          >
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className={labelClass} htmlFor="toko-nama">
@@ -706,6 +759,24 @@ export default function AdminDashboard({
                   className={inputClass}
                   required
                 />
+                {waPreview ? (
+                  <a
+                    href={waPreview}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2 inline-flex max-w-full items-center gap-1.5 truncate text-[0.68rem] font-semibold text-leaf underline decoration-leaf/30 underline-offset-2 transition hover:text-rust-dark"
+                  >
+                    wa.me/{waNumber}
+                  </a>
+                ) : (
+                  <p className="mt-2 text-[0.68rem] text-muted">
+                    Masukkan nomor WhatsApp yang valid.
+                  </p>
+                )}
+                <p className="mt-1 text-[0.64rem] leading-5 text-muted">
+                  Nomor ini dipakai semua tombol WhatsApp setelah info toko
+                  disimpan.
+                </p>
               </div>
             </div>
 
@@ -832,7 +903,7 @@ export default function AdminDashboard({
                   }
                   className="peer sr-only"
                 />
-                <span className="relative h-6 w-11 shrink-0 rounded-full bg-line-strong transition-colors duration-200 after:absolute after:left-1 after:top-1 after:size-4 after:rounded-full after:bg-bone after:shadow-sm after:transition-transform after:duration-200 after:content-[''] peer-checked:bg-success peer-checked:after:translate-x-5" />
+                <span className="relative h-6 w-11 shrink-0 rounded-full bg-line-strong transition-colors duration-200 after:absolute after:left-1 after:top-1 after:size-4 after:rounded-full after:bg-bone after:shadow-sm after:transition-transform after:duration-200 after:content-[''] peer-checked:bg-leaf peer-checked:after:translate-x-5" />
                 <span>
                   <span className="block text-xs font-bold uppercase tracking-[0.1em] text-ink">
                     WhatsApp aktif
@@ -854,7 +925,14 @@ export default function AdminDashboard({
               </button>
             </div>
           </form>
-        </section>
+          </section>
+          <HeroPanel
+            store={store}
+            token={token}
+            onRefresh={onRefresh}
+            onNotice={setNotice}
+          />
+        </div>
       ) : null}
 
       <ProductFormModal

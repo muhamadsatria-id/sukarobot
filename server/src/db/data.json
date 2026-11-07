@@ -9,7 +9,8 @@
     "activeWhatsApp": true,
     "operationalHours": "08.00–21.00 WIB",
     "instagram": "@sukabumidrive",
-    "rentalNote": "Lepas kunci wajib KTP dan SIM A. BBM, tol, dan parkir di luar tarif sewa."
+    "rentalNote": "Lepas kunci wajib KTP dan SIM A. BBM, tol, dan parkir di luar tarif sewa.",
+    "heroImage": ""
   },
   "admin": {
     "id": "admin_1",
@@ -38,6 +39,41 @@
       "id": "cat_4",
       "name": "Premium",
       "slug": "premium"
+    }
+  ],
+
+  "routes": [
+    { "id": "route_1", "name": "Pelabuhan Ratu", "note": "Pantai & liburan", "distance": "± 60 km" },
+    { "id": "route_2", "name": "Cibadak", "note": "Dalam kota", "distance": "± 20 km" },
+    { "id": "route_3", "name": "Bogor", "note": "Luar kota", "distance": "± 90 km" },
+    { "id": "route_4", "name": "Bandung", "note": "Luar kota", "distance": "± 120 km" },
+    { "id": "route_5", "name": "Jakarta", "note": "Antar-jemput", "distance": "± 130 km" }
+  ],
+
+  "testimonials": [
+    {
+      "id": "testi_1",
+      "quote": "Mobilnya bersih, wangi, dan sesuai deskripsi. Proses konfirmasi cepat, adminnya ramah, dan serah terima tepat waktu.",
+      "name": "Rina Kusuma",
+      "role": "Karyawan",
+      "company": "Bandung",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": "testi_2",
+      "quote": "Sewa lepas kunci untuk perjalanan ke Pelabuhan Ratu. Unit nyaman, mesin halus, dan tarifnya jelas sejak awal.",
+      "name": "Dimas Pratama",
+      "role": "Mahasiswa",
+      "company": "Jakarta",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": "testi_3",
+      "quote": "Antar-jemput ke stasiun tepat waktu. Driver ramah dan sabar, cocok untuk perjalanan keluarga.",
+      "name": "Sari Wulandari",
+      "role": "Wisatawan",
+      "company": "Bogor",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
     }
   ],
 
